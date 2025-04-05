@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Project Page</h1>
+    <div th:object="${project}">
+        <p th:text="*{name}"></p>
+        <p th:text="*{description}"></p>
+
+    <a th:href="@{/projects/{id}/edit(id=*{id})}">Edit</a>
+    <a th:href="@{/projects/{id}/delete(id=*{id})}">Delete</a>
+    </div>
+
+    <a th:href="@{/projects}">Back</a>
+</body>
+</html>

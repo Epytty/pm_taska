@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Projects list</title>
+</head>
+<body>
+    <a th:href="@{/projects/new}">Create New Project</a>
+
+    <table>
+        <tr th:each="project : ${projects}" th:object="${project}">
+            <td th:text="*{name}"></td>
+            <td th:text="*{description}"></td>
+            <td><a th:href="@{/projects/{id}(id=*{id})}">Select</a></td>
+        </tr>
+    </table>
+</body>
+</html>
