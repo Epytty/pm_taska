@@ -1,6 +1,7 @@
 package com.taska.pm.dto.mapper;
 
-import com.taska.pm.dto.ProjectDto;
+import com.taska.pm.dto.ProjectCreateDto;
+import com.taska.pm.dto.ProjectViewDto;
 import com.taska.pm.entity.Project;
 import org.mapstruct.Mapper;
 
@@ -9,9 +10,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ProjectMapper {
 
-    ProjectDto toDto(Project project);
+    ProjectViewDto toDto(Project project);
 
-    Project toEntity(ProjectDto projectDto);
+    Project toEntity(ProjectCreateDto projectDto);
 
-    List<ProjectDto> toDtos(List<Project> projects);
+    List<ProjectViewDto> toDtos(List<Project> projects);
 }
