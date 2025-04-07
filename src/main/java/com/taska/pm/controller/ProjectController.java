@@ -1,7 +1,11 @@
 package com.taska.pm.controller;
 
+import com.taska.pm.dto.ProjectDto;
 import com.taska.pm.entity.Project;
+import com.taska.pm.exception.ProjectNotFoundException;
 import com.taska.pm.service.ProjectService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +17,13 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
 
+    private static final Logger log = LogManager.getLogger(ProjectController.class);
     @Autowired
     public ProjectService projectService;
 
     @GetMapping
     public String projectsList(Model model) {
-        List<Project> projects = projectService.findAll();
+        List<ProjectDto> projects = projectService.findAll();
         model.addAttribute("projects", projects);
         return "project/list";
     }
@@ -29,14 +34,14 @@ public class ProjectController {
     }
 
     @PostMapping("/new")
-    public String createNewProject(@ModelAttribute Project project) {
-        projectService.create(project);
+    public String createNewProject(@ModelAttribute ProjectDto projectDto) {
+        projectService.create(projectDto);
         return "redirect:/projects";
     }
 
     @GetMapping("/{id}")
     public String projectPage(@PathVariable(value = "id") Long id, Model model) {
-        Project project = projectService.findById(id);
+        ProjectDto project = projectService.findById(id);
         model.addAttribute("project", project);
         return "project/project";
     }
@@ -44,14 +49,14 @@ public class ProjectController {
     @GetMapping("/{id}/edit")
     public String editProjectPage(@PathVariable(value = "id") Long id,
                                   Model model) {
-        Project project = projectService.findById(id);
+        ProjectDto project = projectService.findById(id);
         model.addAttribute("project", project);
         return "project/edit";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateProject(@PathVariable(value = "id") Long id, @ModelAttribute Project project) {
-        projectService.update(id, project);
+    public String updateProject(@PathVariable(value = "id") Long id, @ModelAttribute ProjectDto projectDto) {
+        projectService.update(id, projectDto);
         return "redirect:/projects/{id}";
     }
 
