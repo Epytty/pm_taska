@@ -17,6 +17,19 @@
     <a th:href="@{/projects/{id}/delete(id=*{id})}">Delete</a>
     </div>
 
+    <h3>Tasks</h3>
+    </div>
+        <ul>
+            <li th:each="task : ${tasks}" th:object="${task}">
+                <span th:text="*{label}"></span>
+                <span th:text="*{description}"></span>
+                <a th:href="@{/projects/{projectId}/{taskId}(projectId=${project.id}, taskId=*{id})}">View</a>
+            </li>
+        </ul>
+    </div>
+
+    <a th:href="@{/projects/{projectId}/new(projectId=${project.id})}">Add New Task</a>
+
     <a th:href="@{/projects}">Back</a>
 </body>
 </html>

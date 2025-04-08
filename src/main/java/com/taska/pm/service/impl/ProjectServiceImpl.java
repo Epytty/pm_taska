@@ -8,28 +8,26 @@ import com.taska.pm.exception.ProjectNotFoundException;
 import com.taska.pm.exception.message.ExceptionMessages;
 import com.taska.pm.repository.ProjectRepository;
 import com.taska.pm.service.ProjectService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
 
-    @Autowired
-    public ProjectRepository projectRepository;
-
-    @Autowired
-    public ProjectMapper projectMapper;
+    private final ProjectRepository projectRepository;
+    private final ProjectMapper projectMapper;
 
     @Override
     public ProjectViewDto findById(Long id) {
         return projectRepository.findById(id)
                 .map(projectMapper::toDto)
                 .orElseThrow(() -> new ProjectNotFoundException(
-                        String.format(ExceptionMessages.PROJECT_NOT_FOUND, id))
-                );
+                        String.format(ExceptionMessages.PROJECT_NOT_FOUND, id)
+                ));
     }
 
     @Override
@@ -38,16 +36,16 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectViewDto create(ProjectCreateDto projectDto) {
-        Project project = projectMapper.toEntity(projectDto);
+    public ProjectViewDto create(ProjectCreateDto projectCreateDto) {
+        Project project = projectMapper.toEntity(projectCreateDto);
         return projectMapper.toDto(projectRepository.save(project));
     }
 
     @Override
-    public Optional<ProjectViewDto> update(Long id, ProjectCreateDto projectDto) {
+    public Optional<ProjectViewDto> update(Long id, ProjectCreateDto projectCreateDto) {
         return projectRepository.findById(id).map(existingProject -> {
-            existingProject.setName(projectDto.getName());
-            existingProject.setDescription(projectDto.getDescription());
+            existingProject.setName(projectCreateDto.getName());
+            existingProject.setDescription(projectCreateDto.getDescription());
             Project updatedProject = projectRepository.save(existingProject);
             return projectMapper.toDto(updatedProject);
         });
