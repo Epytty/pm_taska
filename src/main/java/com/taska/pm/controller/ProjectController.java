@@ -35,13 +35,6 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
-//    @GetMapping("/{id}")
-//    public String projectPage(@PathVariable(value = "id") Long id, Model model) {
-//        ProjectViewDto project = projectService.findById(id);
-//        model.addAttribute("project", project);
-//        return "project/view";
-//    }
-
     @GetMapping("/{id}/edit")
     public String editProjectPage(@PathVariable(value = "id") Long id,
                                   Model model) {
