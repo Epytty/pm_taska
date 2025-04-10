@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class TaskCreateDto {
 
-    private String label;
+    private String title;
     private String description;
 }

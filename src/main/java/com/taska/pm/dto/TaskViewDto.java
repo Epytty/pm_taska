@@ -6,6 +6,6 @@ import lombok.Data;
 public class TaskViewDto {
 
     private Long id;
-    private String label;
+    private String title;
     private String description;
 }

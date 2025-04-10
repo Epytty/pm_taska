@@ -10,7 +10,7 @@
 <body>
     <h1>Create new task</h1>
     <form th:action="@{/projects/{projectId}/new(projectId=${projectId})}" method="post">
-        <input name="label" placeholder="Label">
+        <input name="title" placeholder="Title">
         <input name="description" placeholder="Description">
         <button type="submit">Create</button>
     </form>

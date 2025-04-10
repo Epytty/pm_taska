@@ -10,7 +10,7 @@
 <body>
     <h1>Task Page</h1>
     <div th:object="${task}">
-        <p th:text="*{label}"></p>
+        <p th:text="*{title}"></p>
         <p th:text="*{description}"></p>
 
         <a th:href="@{/projects/{projectId}/{taskId}/edit(projectId=${projectId}, taskId=*{id})}">Edit</a>

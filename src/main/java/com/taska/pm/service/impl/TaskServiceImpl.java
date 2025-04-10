@@ -58,7 +58,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Optional<TaskViewDto> update(Long id, TaskCreateDto taskCreateDto) {
         return taskRepository.findById(id).map(existingTask -> {
-            existingTask.setLabel(taskCreateDto.getLabel());
+            existingTask.setTitle(taskCreateDto.getTitle());
             existingTask.setDescription(taskCreateDto.getDescription());
             Task updatedTask = taskRepository.save(existingTask);
             return taskMapper.toDto(updatedTask);

@@ -9,7 +9,7 @@
 </head>
 <body>
     <form th:action="@{/projects/{projectId}/{taskId}/edit(projectId=${projectId}, taskId=${task.id})}" th:object="${task}" method="post">
-        <input name="label" th:value="*{label}">
+        <input name="title" th:value="*{title}">
         <input name="description" th:value="*{description}">
         <button type="submit">Update</button>
     </form>

@@ -16,7 +16,7 @@
         <tr th:each="project : ${projects}" th:object="${project}">
             <td th:text="*{name}"></td>
             <td th:text="*{description}"></td>
-            <td><a th:href="@{/projects/{id}(id=*{id})}">Select</a></td>
+            <td><a th:href="@{/projects/{projectId}(projectId=*{id})}">Select</a></td>
         </tr>
     </table>
 </body>
