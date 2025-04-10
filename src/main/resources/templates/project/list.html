@@ -8,7 +8,9 @@
     <title>Projects list</title>
 </head>
 <body>
+    <h1>Projects List</h1>
     <a th:href="@{/projects/new}">Create New Project</a>
+    <a th:href="@{/admin}">Admin</a>
 
     <table>
         <tr th:each="project : ${projects}" th:object="${project}">

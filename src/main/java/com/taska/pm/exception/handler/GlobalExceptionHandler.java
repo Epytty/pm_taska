@@ -2,6 +2,7 @@ package com.taska.pm.exception.handler;
 
 import com.taska.pm.exception.ProjectNotFoundException;
 import com.taska.pm.exception.TaskNotFoundException;
+import com.taska.pm.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,6 +23,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(TaskNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String taskNotFound(TaskNotFoundException e) {
+        log.error(e.getMessage(), e);
+        return "error";
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String userNotFound(UserNotFoundException e) {
         log.error(e.getMessage(), e);
         return "error";
     }

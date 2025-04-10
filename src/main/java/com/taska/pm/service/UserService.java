@@ -1,0 +1,22 @@
+package com.taska.pm.service;
+
+
+import com.taska.pm.dto.UserRegisterDto;
+import com.taska.pm.dto.UserUpdateDto;
+import com.taska.pm.dto.UserViewDto;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import javax.management.relation.RoleNotFoundException;
+import java.util.List;
+import java.util.Optional;
+
+public interface UserService extends UserDetailsService {
+
+    UserDetails loadUserByUsername(String username);
+    UserViewDto findById(Long id);
+    List<UserViewDto> findAll();
+    UserViewDto register(UserRegisterDto userRegisterDto) throws RoleNotFoundException;
+    Optional<UserViewDto> update(Long id, UserUpdateDto userUpdateDto);
+    void delete(Long id);
+}

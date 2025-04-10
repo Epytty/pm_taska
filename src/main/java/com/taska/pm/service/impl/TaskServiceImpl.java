@@ -1,9 +1,7 @@
 package com.taska.pm.service.impl;
 
-import com.taska.pm.dto.ProjectViewDto;
 import com.taska.pm.dto.TaskCreateDto;
 import com.taska.pm.dto.TaskViewDto;
-import com.taska.pm.dto.mapper.ProjectMapper;
 import com.taska.pm.dto.mapper.TaskMapper;
 import com.taska.pm.entity.Project;
 import com.taska.pm.entity.Task;
@@ -12,16 +10,15 @@ import com.taska.pm.exception.TaskNotFoundException;
 import com.taska.pm.exception.message.ExceptionMessages;
 import com.taska.pm.repository.ProjectRepository;
 import com.taska.pm.repository.TaskRepository;
-import com.taska.pm.service.ProjectService;
 import com.taska.pm.service.TaskService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
     private final ProjectRepository projectRepository;
@@ -51,7 +48,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskViewDto create(Long projectId, TaskCreateDto taskCreateDto) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ProjectNotFoundException(
-                        String.format(ExceptionMessages.PROJECT_NOT_FOUND)
+                        String.format(ExceptionMessages.PROJECT_NOT_FOUND, projectId)
                 ));
         Task task = taskMapper.toEntity(taskCreateDto);
         task.setProject(project);
