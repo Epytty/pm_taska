@@ -1,6 +1,6 @@
 package com.taska.pm.controller;
 
-import com.taska.pm.dto.UserViewDto;
+import com.taska.pm.dto.user.UserViewDto;
 import com.taska.pm.service.RoleService;
 import com.taska.pm.service.UserService;
 import lombok.RequiredArgsConstructor;

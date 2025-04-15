@@ -1,6 +1,5 @@
-package com.taska.pm.dto;
+package com.taska.pm.dto.user;
 
-import com.taska.pm.entity.Role;
 import lombok.Data;
 
 @Data

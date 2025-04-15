@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+
+    <form th:action="@{/profile/edit}" th:object="${user}" method="post">
+        <label for="firstName">Имя</label>
+        <input name="firstName" id="firstName" th:value="*{firstName}">
+
+        <label for="middleName">Отчество</label>
+        <input name="middleName" id="middleName" th:value="*{middleName}">
+
+        <label for="lastName">Фамилия</label>
+        <input name="lastName" id="lastName" th:value="*{lastName}">
+
+        <button type="submit">Edit</button>
+    </form>
+</body>
+</html>

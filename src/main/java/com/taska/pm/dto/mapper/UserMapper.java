@@ -1,7 +1,7 @@
 package com.taska.pm.dto.mapper;
 
-import com.taska.pm.dto.UserRegisterDto;
-import com.taska.pm.dto.UserViewDto;
+import com.taska.pm.dto.user.UserRegisterDto;
+import com.taska.pm.dto.user.UserViewDto;
 import com.taska.pm.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

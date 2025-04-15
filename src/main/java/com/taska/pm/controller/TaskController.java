@@ -1,8 +1,8 @@
 package com.taska.pm.controller;
 
-import com.taska.pm.dto.ProjectViewDto;
-import com.taska.pm.dto.TaskCreateDto;
-import com.taska.pm.dto.TaskViewDto;
+import com.taska.pm.dto.project.ProjectViewDto;
+import com.taska.pm.dto.task.TaskCreateDto;
+import com.taska.pm.dto.task.TaskViewDto;
 import com.taska.pm.service.ProjectService;
 import com.taska.pm.service.TaskService;
 import lombok.RequiredArgsConstructor;

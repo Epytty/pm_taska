@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Profile</h1>
+
+    <div th:object="${user}">
+        <label for="firstName">Имя</label>
+        <p name="firstName" id="firstName" th:text="*{firstName}"></p>
+
+        <label for="middleName">Отчество</label>
+        <p name="middleName" id="middleName" th:text="*{middleName}"></p>
+
+        <label for="lastName">Фамилия</label>
+        <p name="lastName" id="lastName" th:text="*{lastName}"></p>
+
+        <a th:href="@{/profile/edit}">Edit profile</a>
+    </div>
+
+</body>
+</html>

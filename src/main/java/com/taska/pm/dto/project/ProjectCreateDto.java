@@ -1,4 +1,4 @@
-package com.taska.pm.dto;
+package com.taska.pm.dto.project;
 
 import lombok.Data;
 

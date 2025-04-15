@@ -1,7 +1,9 @@
 package com.taska.pm.service.impl;
 
-import com.taska.pm.dto.*;
 import com.taska.pm.dto.mapper.UserMapper;
+import com.taska.pm.dto.user.UserRegisterDto;
+import com.taska.pm.dto.user.UserUpdateDto;
+import com.taska.pm.dto.user.UserViewDto;
 import com.taska.pm.entity.Role;
 import com.taska.pm.entity.User;
 import com.taska.pm.exception.UserNotFoundException;
@@ -11,6 +13,8 @@ import com.taska.pm.repository.UserRepository;
 import com.taska.pm.service.CustomUserDetailsService;
 import com.taska.pm.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,6 +54,14 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UserNotFoundException(
                         String.format(ExceptionMessages.USER_NOT_FOUND, id)
             ));
+    }
+
+    @Override
+    public UserViewDto findCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User  not found"));
+        return userMapper.toDto(user);
     }
 
     @Override

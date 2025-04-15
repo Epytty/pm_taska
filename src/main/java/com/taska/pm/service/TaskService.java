@@ -1,8 +1,8 @@
 package com.taska.pm.service;
 
 
-import com.taska.pm.dto.TaskCreateDto;
-import com.taska.pm.dto.TaskViewDto;
+import com.taska.pm.dto.task.TaskCreateDto;
+import com.taska.pm.dto.task.TaskViewDto;
 
 import java.util.List;
 import java.util.Optional;

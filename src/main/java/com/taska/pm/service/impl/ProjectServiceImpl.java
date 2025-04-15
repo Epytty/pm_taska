@@ -1,7 +1,7 @@
 package com.taska.pm.service.impl;
 
-import com.taska.pm.dto.ProjectCreateDto;
-import com.taska.pm.dto.ProjectViewDto;
+import com.taska.pm.dto.project.ProjectCreateDto;
+import com.taska.pm.dto.project.ProjectViewDto;
 import com.taska.pm.dto.mapper.ProjectMapper;
 import com.taska.pm.entity.Project;
 import com.taska.pm.exception.ProjectNotFoundException;

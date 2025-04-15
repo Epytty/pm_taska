@@ -1,7 +1,7 @@
 package com.taska.pm.service.impl;
 
-import com.taska.pm.dto.TaskCreateDto;
-import com.taska.pm.dto.TaskViewDto;
+import com.taska.pm.dto.task.TaskCreateDto;
+import com.taska.pm.dto.task.TaskViewDto;
 import com.taska.pm.dto.mapper.TaskMapper;
 import com.taska.pm.entity.Project;
 import com.taska.pm.entity.Task;
