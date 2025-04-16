@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.management.relation.RoleNotFoundException;
@@ -64,9 +65,9 @@ public class UserController {
         return "redirect:/profile";
     }
 
-    @GetMapping("/users/delete")
-    public String deleteUser( ) {
-
+    @GetMapping("/users/{userId}/delete")
+    public String deleteUser(@PathVariable(name = "userId") Long userId) {
+        userService.delete(userId);
         return "redirect:/users";
     }
 }

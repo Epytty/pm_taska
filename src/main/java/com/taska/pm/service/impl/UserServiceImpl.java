@@ -60,7 +60,10 @@ public class UserServiceImpl implements UserService {
     public UserViewDto findCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User  not found"));
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        String.format(ExceptionMessages.USERNAME_NOT_FOUND, username)
+                ));
         return userMapper.toDto(user);
     }
 
