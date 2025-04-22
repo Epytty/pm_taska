@@ -12,6 +12,10 @@
     <form th:action="@{/projects/{projectId}/new(projectId=${projectId})}" method="post">
         <input name="title" placeholder="Title">
         <input name="description" placeholder="Description">
+        <select name="responsibleUser" th:object="${user}">
+            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName}"></option>
+        </select>
+
         <button type="submit">Create</button>
     </form>
     <a th:href="@{/projects/{projectId}(projectId=${projectId})}">Back to Project</a>

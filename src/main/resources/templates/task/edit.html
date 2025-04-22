@@ -11,6 +11,9 @@
     <form th:action="@{/projects/{projectId}/{taskId}/edit(projectId=${projectId}, taskId=${task.id})}" th:object="${task}" method="post">
         <input name="title" th:value="*{title}">
         <input name="description" th:value="*{description}">
+        <select name="responsibleUser" th:object="${user}">
+            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName}"></option>
+        </select>
         <button type="submit">Update</button>
     </form>
 </body>

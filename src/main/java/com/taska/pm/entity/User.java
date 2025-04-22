@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -28,4 +31,11 @@ public class User {
 
     @ManyToOne
     private Role role;
+
+    @OneToMany(mappedBy = "responsibleUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> assignedTasks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> createdTasks = new ArrayList<>();
+
 }

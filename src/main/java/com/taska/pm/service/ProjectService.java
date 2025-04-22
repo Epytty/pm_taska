@@ -1,6 +1,6 @@
 package com.taska.pm.service;
 
-import com.taska.pm.dto.project.ProjectCreateDto;
+import com.taska.pm.dto.project.ProjectSaveDto;
 import com.taska.pm.dto.project.ProjectViewDto;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public interface ProjectService {
 
     List<ProjectViewDto> findAll();
     ProjectViewDto findById(Long id);
-    ProjectViewDto create(ProjectCreateDto projectCreateDto);
-    Optional<ProjectViewDto> update(Long id, ProjectCreateDto projectCreateDto);
+    ProjectViewDto create(ProjectSaveDto projectSaveDto);
+    Optional<ProjectViewDto> update(Long id, ProjectSaveDto projectSaveDto);
     void delete(Long id);
 }

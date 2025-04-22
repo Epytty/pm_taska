@@ -12,6 +12,10 @@
     <div th:object="${task}">
         <p th:text="*{title}"></p>
         <p th:text="*{description}"></p>
+        <p th:text="*{responsibleUserFullName}"></p>
+        <p th:text="*{creatorFullName}"></p>
+        <p th:text="*{editorFullName}"></p>
+        <input type="checkbox" th:checked="*{isEdited}" disabled>
 
         <a th:href="@{/projects/{projectId}/{taskId}/edit(projectId=${projectId}, taskId=*{id})}">Edit</a>
         <a th:href="@{/projects/{projectId}/{taskId}/delete(projectId=${projectId}, taskId=*{id})}">Delete</a>

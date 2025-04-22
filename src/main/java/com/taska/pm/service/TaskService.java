@@ -1,7 +1,7 @@
 package com.taska.pm.service;
 
 
-import com.taska.pm.dto.task.TaskCreateDto;
+import com.taska.pm.dto.task.TaskSaveDto;
 import com.taska.pm.dto.task.TaskViewDto;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public interface TaskService {
     TaskViewDto findById(Long id);
     List<TaskViewDto> findAll();
     List<TaskViewDto> findByProjectId(Long projectId);
-    TaskViewDto create(Long id, TaskCreateDto taskCreateDto);
-    Optional<TaskViewDto> update(Long id, TaskCreateDto taskCreateDto);
+    TaskViewDto create(Long id, Long creatorId, TaskSaveDto taskSaveDto);
+    Optional<TaskViewDto> update(Long id, Long editorId, TaskSaveDto taskSaveDto);
     void delete(Long id);
 }

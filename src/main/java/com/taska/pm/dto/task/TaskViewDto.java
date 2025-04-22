@@ -8,4 +8,8 @@ public class TaskViewDto {
     private Long id;
     private String title;
     private String description;
+    private String responsibleUserFullName;
+    private String creatorFullName;
+    private String editorFullName;
+    private Boolean isEdited;
 }

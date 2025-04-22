@@ -22,4 +22,15 @@ public class Task {
 
     @ManyToOne
     private Project project;
+
+    @ManyToOne
+    private User responsibleUser;
+
+    @ManyToOne
+    private User creator;
+
+    @ManyToOne
+    private User editor;
+
+    private Boolean isEdited;
 }

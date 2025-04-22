@@ -1,6 +1,6 @@
 package com.taska.pm.controller;
 
-import com.taska.pm.dto.project.ProjectCreateDto;
+import com.taska.pm.dto.project.ProjectSaveDto;
 import com.taska.pm.dto.project.ProjectViewDto;
 import com.taska.pm.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +30,8 @@ public class ProjectController {
     }
 
     @PostMapping("/new")
-    public String createNewProject(@ModelAttribute ProjectCreateDto projectCreateDto) {
-        projectService.create(projectCreateDto);
+    public String createNewProject(@ModelAttribute ProjectSaveDto projectSaveDto) {
+        projectService.create(projectSaveDto);
         return "redirect:/projects";
     }
 
@@ -45,8 +45,8 @@ public class ProjectController {
 
     @PostMapping("/{id}/edit")
     public String updateProject(@PathVariable(value = "id") Long id,
-                                @ModelAttribute ProjectCreateDto projectCreateDto) {
-        projectService.update(id, projectCreateDto);
+                                @ModelAttribute ProjectSaveDto projectSaveDto) {
+        projectService.update(id, projectSaveDto);
         return "redirect:/projects/{id}";
     }
 

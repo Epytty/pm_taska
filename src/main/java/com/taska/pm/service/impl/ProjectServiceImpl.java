@@ -1,6 +1,6 @@
 package com.taska.pm.service.impl;
 
-import com.taska.pm.dto.project.ProjectCreateDto;
+import com.taska.pm.dto.project.ProjectSaveDto;
 import com.taska.pm.dto.project.ProjectViewDto;
 import com.taska.pm.dto.mapper.ProjectMapper;
 import com.taska.pm.entity.Project;
@@ -36,16 +36,16 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectViewDto create(ProjectCreateDto projectCreateDto) {
-        Project project = projectMapper.toEntity(projectCreateDto);
+    public ProjectViewDto create(ProjectSaveDto projectSaveDto) {
+        Project project = projectMapper.toEntity(projectSaveDto);
         return projectMapper.toDto(projectRepository.save(project));
     }
 
     @Override
-    public Optional<ProjectViewDto> update(Long id, ProjectCreateDto projectCreateDto) {
+    public Optional<ProjectViewDto> update(Long id, ProjectSaveDto projectSaveDto) {
         return projectRepository.findById(id).map(existingProject -> {
-            existingProject.setName(projectCreateDto.getName());
-            existingProject.setDescription(projectCreateDto.getDescription());
+            existingProject.setName(projectSaveDto.getName());
+            existingProject.setDescription(projectSaveDto.getDescription());
             Project updatedProject = projectRepository.save(existingProject);
             return projectMapper.toDto(updatedProject);
         });

@@ -1,11 +1,15 @@
 package com.taska.pm.controller;
 
 import com.taska.pm.dto.project.ProjectViewDto;
-import com.taska.pm.dto.task.TaskCreateDto;
+import com.taska.pm.dto.task.TaskSaveDto;
 import com.taska.pm.dto.task.TaskViewDto;
+import com.taska.pm.dto.user.UserViewDto;
+import com.taska.pm.service.CustomUserDetailsService;
 import com.taska.pm.service.ProjectService;
 import com.taska.pm.service.TaskService;
+import com.taska.pm.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +23,7 @@ public class TaskController {
 
     private final ProjectService projectService;
     private final TaskService taskService;
+    private final UserService userService;
 
     @GetMapping
     public String projectPage(@PathVariable(name = "projectId") Long projectId,
@@ -33,15 +38,18 @@ public class TaskController {
     @GetMapping("/new")
     public String newTaskPage(@PathVariable(name = "projectId") Long projectId,
                               Model model) {
+        List<UserViewDto> users = userService.findAll();
+        model.addAttribute("users", users);
         model.addAttribute("projectId", projectId);
         return "task/new";
     }
 
     @PostMapping("/new")
     public String createNewTask(@PathVariable(name = "projectId") Long projectId,
-                                @ModelAttribute TaskCreateDto taskCreateDto,
-                                Model model) {
-        taskService.create(projectId, taskCreateDto);
+                                @AuthenticationPrincipal CustomUserDetailsService userDetails,
+                                @ModelAttribute TaskSaveDto taskSaveDto) {
+        Long creatorId = userDetails.getUser().getId();
+        taskService.create(projectId, creatorId, taskSaveDto);
         return "redirect:/projects/{projectId}";
     }
 
@@ -58,6 +66,8 @@ public class TaskController {
     public String editTaskPage(@PathVariable(name = "projectId") Long projectId,
                                @PathVariable(name = "taskId") Long taskId,
                                Model model) {
+        List<UserViewDto> users = userService.findAll();
+        model.addAttribute("users", users);
         TaskViewDto task = taskService.findById(taskId);
         model.addAttribute("task", task);
         return "task/edit";
@@ -66,8 +76,10 @@ public class TaskController {
     @PostMapping("/{taskId}/edit")
     public String updateTask(@PathVariable(name = "projectId") Long projectId,
                              @PathVariable(name = "taskId") Long taskId,
-                             @ModelAttribute TaskCreateDto taskCreateDto) {
-        taskService.update(taskId, taskCreateDto);
+                             @AuthenticationPrincipal CustomUserDetailsService userDetails,
+                             @ModelAttribute TaskSaveDto taskSaveDto) {
+        Long editorId = userDetails.getUser().getId();
+        taskService.update(taskId, editorId, taskSaveDto);
         return "redirect:/projects/{projectId}/{taskId}";
     }
 
