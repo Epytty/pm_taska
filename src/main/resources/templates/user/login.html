@@ -5,18 +5,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <title>TaskaPM</title>
 </head>
 <body>
-    <h1>Login Page</h1>
-
-    <form th:action="@{/login}" method="post">
-        <input name="username" placeholder="Username">
-        <input name="password" placeholder="Password">
-        <button type="submit">Login</button>
+    <form th:action="@{/login}" method="post" class="loginForm">
+        <span class="loginFormText">Добро пожаловать!</span>
+        <input name="username" placeholder="Логин">
+        <input name="password" type="password" placeholder="Пароль">
+        <button type="submit" class="loginFormSubmit">Войти</button>
     </form>
-
-    <a th:href="@{/register}">register</a>
-
 </body>
 </html>
