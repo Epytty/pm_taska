@@ -9,4 +9,6 @@ public class UserViewDto {
     private String firstName;
     private String middleName;
     private String lastName;
+    private String telegramUsername;
+    private Boolean notificationAgreement;
 }

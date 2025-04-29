@@ -11,6 +11,7 @@ import com.taska.pm.exception.message.ExceptionMessages;
 import com.taska.pm.repository.RoleRepository;
 import com.taska.pm.repository.UserRepository;
 import com.taska.pm.service.CustomUserDetailsService;
+import com.taska.pm.service.TaskaBotService;
 import com.taska.pm.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
+    private final TaskaBotService taskaBotService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -85,6 +87,8 @@ public class UserServiceImpl implements UserService {
             existingUser.setFirstName(userUpdateDto.getFirstName());
             existingUser.setMiddleName(userUpdateDto.getMiddleName());
             existingUser.setLastName(userUpdateDto.getLastName());
+            existingUser.setTelegramUsername(userUpdateDto.getTelegramUsername());
+            existingUser.setNotificationAgreement(userUpdateDto.getNotificationAgreement());
             User updatedUser = userRepository.save(existingUser);
             return userMapper.toDto(updatedUser);
         });
@@ -94,4 +98,12 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public boolean isNotificationExists(Long userId) {
+        return Optional.ofNullable(findById(userId))
+                .map(UserViewDto::getNotificationAgreement)
+                .orElse(false);
+    }
+
 }

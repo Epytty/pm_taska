@@ -13,6 +13,8 @@ public interface UserMapper {
 
     UserViewDto toDto(User user);
 
+    User toEntityFromViewDto(UserViewDto userViewDto);
+
     @Mapping(target = "username", source = "username")
     @Mapping(target = "password", source = "password")
     @Mapping(target = "role", ignore = true)

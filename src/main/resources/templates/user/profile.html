@@ -20,8 +20,20 @@
         <label for="lastName">Фамилия</label>
         <p name="lastName" id="lastName" th:text="*{lastName}"></p>
 
+        <label for="telegramUsername">Имя в телеграме</label>
+        <p name="telegramUsername" id="telegramUsername" th:text="*{telegramUsername}"></p>
+
         <a th:href="@{/profile/edit}">Edit profile</a>
     </div>
 
+<!--    <form th:action="@{/notifAgree}" method="post">-->
+<!--        <input type="hidden" name="userId" th:value="${user.id}"/>-->
+<!--        <button type="submit">Согласиться</button>-->
+<!--    </form>-->
+
+<!--    <form th:action="@{/notifDisagree}" method="post">-->
+<!--        <input type="hidden" name="userId" th:value="${user.id}"/>-->
+<!--        <button type="submit">Отказаться</button>-->
+<!--    </form>-->
 </body>
 </html>

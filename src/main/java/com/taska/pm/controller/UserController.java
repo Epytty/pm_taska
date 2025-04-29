@@ -70,4 +70,16 @@ public class UserController {
         userService.delete(userId);
         return "redirect:/users";
     }
+
+//    @PostMapping("/notifAgree")
+//    public String botNotificationAgree(@AuthenticationPrincipal CustomUserDetailsService userDetails) {
+//        userService.notificationAgree(userDetails.getUser().getId());
+//        return "redirect:/profile";
+//    }
+//
+//    @PostMapping("/notifDisagree")
+//    public String botNotificationDisagree(@AuthenticationPrincipal CustomUserDetailsService userDetails) {
+//        userService.notificationDisagree(userDetails.getUser().getId());
+//        return "redirect:/profile";
+//    }
 }

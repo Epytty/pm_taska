@@ -1,15 +1,15 @@
 package com.taska.pm.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.ws.rs.DefaultValue;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
@@ -29,6 +29,11 @@ public class User {
 
     private String lastName;
 
+    private String telegramUsername;
+
+    @DefaultValue("false")
+    private Boolean notificationAgreement;
+
     @ManyToOne
     private Role role;
 
@@ -37,5 +42,4 @@ public class User {
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> createdTasks = new ArrayList<>();
-
 }

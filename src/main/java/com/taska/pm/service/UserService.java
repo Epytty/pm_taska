@@ -20,4 +20,6 @@ public interface UserService extends UserDetailsService {
     UserViewDto register(UserRegisterDto userRegisterDto) throws RoleNotFoundException;
     Optional<UserViewDto> update(Long id, UserUpdateDto userUpdateDto);
     void delete(Long id);
+    boolean isNotificationExists(Long userId);
+
 }

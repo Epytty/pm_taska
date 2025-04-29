@@ -20,6 +20,12 @@
         <label for="lastName">Фамилия</label>
         <input name="lastName" id="lastName" th:value="*{lastName}">
 
+        <label for="telegramUsername">Имя в телеграме</label>
+        <input name="telegramUsername" id="telegramUsername" th:value="*{telegramUsername}">
+
+        <label for="notificationAgreement">Согласие на рассылку</label>
+        <input type="checkbox" id="notificationAgreement" th:field="*{notificationAgreement}">
+
         <button type="submit">Edit</button>
     </form>
 </body>

@@ -22,6 +22,7 @@ public class TaskaBotServiceImpl implements TaskaBotService {
         var chatIdStr = String.valueOf(chatId);
         var sendMessage = new SendMessage(chatIdStr, text);
         sendMessage.setParseMode(MessagePatterns.PARSE_MODE_MARKDOWN);
+
         try {
             bot.execute(sendMessage);
         } catch (TelegramApiException e) {
