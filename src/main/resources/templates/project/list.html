@@ -5,12 +5,25 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
     <title>Projects list</title>
 </head>
 <body>
-    <h1>Projects List</h1>
-    <a th:href="@{/projects/new}">Create New Project</a>
-    <a th:href="@{/admin}">Admin</a>
+    <header>
+        <div th:replace="~{fragments/header :: header}"></div>
+    </header>
+
+    <div>
+        <button class="newProjectBtn">
+            <a th:href="@{/projects/new}">
+                <span class="newProjectContainer">
+                    <img th:src="@{/images/plus.svg}" alt="plus" class="newProjectImage">
+                    <span class="newProjectText">Новый проект</span>
+                </span>
+            </a>
+        </button>
+    </div>
 
     <table>
         <tr th:each="project : ${projects}" th:object="${project}">
@@ -19,5 +32,7 @@
             <td><a th:href="@{/projects/{projectId}(projectId=*{id})}">Select</a></td>
         </tr>
     </table>
+
+
 </body>
 </html>

@@ -1,0 +1,166 @@
+@font-face {
+	font-family: 'MontserratBold'; 
+	src: url(/fonts/Montserrat-Bold.ttf); 
+}
+
+@font-face {
+	font-family: 'MontserratRegular'; 
+	src: url(/resources/fonts/Montserrat-Regular.ttf); 
+}
+
+body {
+    font-family: 'MontserratRegular', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #4759ff;
+    height: 90px;
+}
+
+.leftPart {
+    display: flex;
+    align-items: center;
+    width: 500px;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.headerLabel {
+    color: #f0f0f0;
+    display: flex;
+    width: 300px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerLabel h1 {
+    font-size: 48px;
+}
+
+.navBar {
+    display: flex;
+    align-items: center;
+    width: 500px;
+    justify-content: space-around;
+}
+
+.controlButton {
+    font-size: 16px;
+    width: 100px;
+    height: 70px;
+    border: none;
+    border-radius: 10px;
+    background-color: #4759ff;
+    transition: background-color 0.2s;
+}
+
+.controlButton:hover {
+    background-color: #8d8bff;
+}
+
+a {
+    text-decoration: none;
+}
+
+.controlButtonContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transition: scale 0.2s;
+}
+
+.controlButtonContainer:hover {
+    scale: 107%;
+}
+
+.controlButtonContainer span {
+    color: #f0f0f0;
+}
+
+.controlImage, .newProjectImage {
+    width: 24px;
+}
+
+.newProjectBtn {
+    display: flex;
+    width: 210px;
+    height: 45px;
+    margin: 1%;
+    border: none;
+    border-radius: 10px;
+    background-color: #4759ff;
+    transition: background-color 0.2s;
+}
+
+
+.newProjectBtn:hover {
+    background-color: #8d8bff;
+}
+
+.newProjectContainer {
+    display: flex;
+    width: 195px;
+    height: 45px;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: scale 0.2s;
+}
+
+
+.newProjectContainer:hover {
+    scale: 105%;
+}
+
+.newProjectText {
+    font-family: 'MontserratBold';
+    font-size: 18px;
+    color: #f0f0f0;
+}
+
+table {
+    width: 100%; /* Таблица занимает всю ширину родителя */
+    border-collapse: collapse; /* Убирает промежутки между ячейками */
+    border: none; /* Убирает рамки таблицы */
+    border-radius: 10px; /* Скругление краев таблицы */
+}
+
+td, th {
+    padding: 10px; /* Внутренние отступы ячеек */
+    text-align: left; /* Текст выравнивается по левому краю */
+    vertical-align: middle; /* Текст выравнивается по центру по вертикали */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Светлый фон для четных строк */
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff; /* Белый фон для нечетных строк */
+}
+
+tr:hover {
+    background-color: #e0e0e0; /* Фон при наведении на строку */
+}
+
+a {
+    text-decoration: none; /* Убирает подчеркивание ссылок */
+    color: #007BFF; /* Цвет ссылок */
+}
+
+a:hover {
+    text-decoration: underline; /* Подчеркивание ссылки при наведении */
+}
+
+
+
+
+
+

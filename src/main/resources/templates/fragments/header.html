@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/src/main/resources/static/css/style.css" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+  <div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+    <header class="header">
+      <div class="leftPart">
+        <div class="burgerMenu">Burger Menu</div> 
+        <span class="headerLabel">
+          <h1>Taska</h1>     
+          <span>project manager</span>
+        </span>
+      </div>
+      <div class="rightPart">
+        <nav class="navBar">
+          <button class="controlButton">
+            <a th:href="@{/projects}">
+              <span class="controlButtonContainer">
+                <img th:src="@{/images/project.svg}" alt="projects" class="controlImage">
+                <span>Проекты</span>
+              </span>
+            </a>
+          </button>
+          <button class="controlButton">
+            <a th:href="@{/profile}">
+              <span class="controlButtonContainer">
+                <img th:src="@{/images/user.svg}" alt="profile" class="controlImage">
+                <span>Профиль</span>
+              </span>
+            </a>
+          </button>
+          <button class="controlButton">
+            <a th:href="@{/logout}">
+              <span class="controlButtonContainer">
+                <img th:src="@{/images/log-out.svg}" alt="logout" class="controlImage">
+                <span>Выйти</span>
+              </span>
+            </a>
+          </button>
+          <button class="controlButton">
+            <a th:href="@{/settings}">
+              <span class="controlButtonContainer">
+                <img th:src="@{/images/settings.svg}" alt="settings" class="controlImage">
+                <span>Настройки</span>
+              </span>
+            </a>
+          </button>
+        </nav>
+      </div>
+    </header>
+  </div>
+</body>
+</html>
