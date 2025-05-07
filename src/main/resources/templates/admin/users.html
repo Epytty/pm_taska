@@ -10,14 +10,14 @@
 <body>
     <h1>Users List</h1>
 
-    <a th:href="@{/admin/users/new}">Register New User</a>
+    <a th:href="@{/admin/newUser}">Register New User</a>
     <table>
         <tr th:each="user : ${users}" th:object="${user}">
             <td th:text="*{firstName}"></td>
             <td th:text="*{middleName}"></td>
             <td th:text="*{lastName}"></td>
             <td>
-                <a th:href="@{/users/{id}/delete(id=${user.id})}">Delete</a>
+                <a th:href="@{/admin/users/{id}/delete(id=${user.id})}">Delete</a>
             </td>
         </tr>
     </table>

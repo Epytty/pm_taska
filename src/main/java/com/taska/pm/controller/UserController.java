@@ -31,19 +31,6 @@ public class UserController {
         return "user/login";
     }
 
-    @GetMapping("/register")
-    public String newUserPage(Model model) {
-        List<Role> roles = roleService.findAll();
-        model.addAttribute("roles", roles);
-        return "user/register";
-    }
-
-    @PostMapping("/register")
-    public String registerUser(@ModelAttribute UserRegisterDto userRegisterDto) throws RoleNotFoundException {
-        userService.register(userRegisterDto);
-        return "redirect:/login";
-    }
-
     @GetMapping("/profile")
     public String profilePage(Model model) {
         UserViewDto user = userService.findCurrentUser();
@@ -63,12 +50,6 @@ public class UserController {
                              @ModelAttribute UserUpdateDto userUpdateDto) {
         userService.update(userDetails.getUser().getId(), userUpdateDto);
         return "redirect:/profile";
-    }
-
-    @GetMapping("/users/{userId}/delete")
-    public String deleteUser(@PathVariable(name = "userId") Long userId) {
-        userService.delete(userId);
-        return "redirect:/users";
     }
 
 //    @PostMapping("/notifAgree")
