@@ -1,9 +1,11 @@
 package com.taska.pm.service.impl;
 
 import com.taska.pm.bot.patterns.MessagePatterns;
+import com.taska.pm.dto.project.ProjectViewDto;
 import com.taska.pm.dto.task.TaskSaveDto;
 import com.taska.pm.dto.task.TaskViewDto;
 import com.taska.pm.dto.mapper.TaskMapper;
+import com.taska.pm.dto.user.UserViewDto;
 import com.taska.pm.entity.Project;
 import com.taska.pm.entity.Task;
 import com.taska.pm.entity.User;
@@ -16,6 +18,7 @@ import com.taska.pm.repository.TaskRepository;
 import com.taska.pm.repository.UserRepository;
 import com.taska.pm.service.TaskService;
 import com.taska.pm.service.TaskaBotService;
+import com.taska.pm.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +38,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskViewDto findById(Long id) {
         return taskRepository.findById(id)
-                .map(taskMapper::toDto)
-                .orElseThrow(() -> new TaskNotFoundException(
-                        String.format(ExceptionMessages.TASK_NOT_FOUND, id)
-                ));
+            .map(taskMapper::toDto)
+            .orElseThrow(() -> new TaskNotFoundException(
+                String.format(ExceptionMessages.TASK_NOT_FOUND, id)
+            ));
     }
 
     @Override
@@ -54,29 +57,25 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskViewDto create(Long projectId, Long creatorId, TaskSaveDto taskSaveDto) {
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ProjectNotFoundException(
-                        String.format(ExceptionMessages.PROJECT_NOT_FOUND, projectId)
-                ));
+            .orElseThrow(() -> new ProjectNotFoundException(
+                String.format(ExceptionMessages.PROJECT_NOT_FOUND, projectId)
+            ));
         Task task = taskMapper.toEntity(taskSaveDto);
-        Long userId = task.getResponsibleUser().getId();
-        User responsibleUser = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(
-                        String.format(ExceptionMessages.USER_NOT_FOUND, userId)
-                ));
+        Long responsibleUserId = task.getResponsibleUser().getId();
+        User responsibleUser = userRepository.findById(responsibleUserId)
+            .orElseThrow(() -> new UserNotFoundException(
+                String.format(ExceptionMessages.USER_NOT_FOUND, responsibleUserId)
+            ));
         User creator = userRepository.findById(creatorId)
-                .orElseThrow(() -> new UserNotFoundException(
-                        String.format(ExceptionMessages.USER_NOT_FOUND, creatorId)
-                ));
+            .orElseThrow(() -> new UserNotFoundException(
+                String.format(ExceptionMessages.USER_NOT_FOUND, creatorId)
+            ));
         task.setProject(project);
         task.setResponsibleUser(responsibleUser);
         task.setCreator(creator);
-
-        if (responsibleUser.getNotificationAgreement()) {
-            taskaBotService.sendMessage(responsibleUser.getTelegramChatId(),
-                    String.format(MessagePatterns.NEW_TASK_NOTIFICATION,
-                            task.getProject().getName(), task.getTitle(), task.getDescription()));
-        }
-        return taskMapper.toDto(taskRepository.save(task));
+        Task createdTask = taskRepository.save(task);
+        sendMessageToResponsibleUser(projectId, createdTask, responsibleUserId);
+        return taskMapper.toDto(createdTask);
     }
 
     @Override
@@ -84,19 +83,20 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findById(taskId).map(existingTask -> {
             existingTask.setTitle(taskSaveDto.getTitle());
             existingTask.setDescription(taskSaveDto.getDescription());
+            existingTask.setStartDate(taskSaveDto.getStartDate());
+            existingTask.setEndDate(taskSaveDto.getEndDate());
             Long userId = taskSaveDto.getResponsibleUser();
             User responsibleUser = userRepository.findById(userId)
-                    .orElseThrow(() -> new UserNotFoundException(
-                            String.format(ExceptionMessages.USER_NOT_FOUND, userId)
-                    ));
+                .orElseThrow(() -> new UserNotFoundException(
+                    String.format(ExceptionMessages.USER_NOT_FOUND, userId)));
             existingTask.setResponsibleUser(responsibleUser);
             User editor = userRepository.findById(editorId)
-                    .orElseThrow(() -> new UserNotFoundException(
-                            String.format(ExceptionMessages.USER_NOT_FOUND, editorId)
-                    ));
+                .orElseThrow(() -> new UserNotFoundException(
+                    String.format(ExceptionMessages.USER_NOT_FOUND, editorId)));
             existingTask.setEditor(editor);
             existingTask.setIsEdited(true);
             Task updatedTask = taskRepository.save(existingTask);
+            sendMessageToResponsibleUser(updatedTask.getProject().getId(), updatedTask, updatedTask.getResponsibleUser().getId());
             return taskMapper.toDto(updatedTask);
         });
     }
@@ -104,5 +104,41 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void delete(Long id) {
         taskRepository.deleteById(id);
+    }
+
+    @Override
+    public void sendMessageToResponsibleUser(Long projectId, Task task, Long responsibleUserId) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ProjectNotFoundException(
+                        String.format(ExceptionMessages.PROJECT_NOT_FOUND, projectId)
+                ));
+        User responsibleUser = userRepository.findById(responsibleUserId)
+            .orElseThrow(() -> new UserNotFoundException(
+                String.format(ExceptionMessages.USER_NOT_FOUND, responsibleUserId)));
+        TaskViewDto taskViewDto = taskMapper.toDto(task);
+
+        if (responsibleUser.getNotificationAgreement()) {
+            if (taskViewDto.getIsEdited() == null) {
+                taskaBotService.sendMessage(responsibleUser.getTelegramChatId(),
+                    String.format(MessagePatterns.NEW_TASK_NOTIFICATION,
+                        taskViewDto.getId(),
+                        task.getProject().getId(),
+                        taskViewDto.getId(),
+                        taskViewDto.getTitle(),
+                        taskViewDto.getStartDate(),
+                        taskViewDto.getEndDate(),
+                        taskViewDto.getCreatorFullName()));
+            } else {
+                taskaBotService.sendMessage(responsibleUser.getTelegramChatId(),
+                    String.format(MessagePatterns.TASK_CHANGES_NOTIFICATION,
+                        taskViewDto.getId(),
+                        task.getProject().getId(),
+                        taskViewDto.getId(),
+                        taskViewDto.getTitle(),
+                        taskViewDto.getStartDate(),
+                        taskViewDto.getEndDate(),
+                        taskViewDto.getEditorFullName()));
+            }
+        }
     }
 }

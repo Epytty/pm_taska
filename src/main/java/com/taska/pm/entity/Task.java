@@ -3,6 +3,8 @@ package com.taska.pm.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -18,6 +20,10 @@ public class Task {
     private String title;
 
     private String description;
+
+    private LocalDate startDate;
+
+    private LocalDate endDate;
 
     @ManyToOne
     private Project project;

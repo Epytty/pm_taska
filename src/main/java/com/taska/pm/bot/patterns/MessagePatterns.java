@@ -43,11 +43,24 @@ public final class MessagePatterns {
             """;
 
     public static final String NEW_TASK_NOTIFICATION = """
-            Назначена новая задача в проекте *%s*
-            _Заголовок:_
-            %s
+            Назначена новая задача [%s](http://127.0.0.1:8080/projects/%s/%s)!
+           
+            *Заголовок:* `%s`
+
+            *Сроки выполнения:*
+            `%s` - `%s`
             
-            _Описание:_
-            %s
+            *Создал:* `%s`
+            """;
+
+    public static final String TASK_CHANGES_NOTIFICATION = """
+            Изменения в задаче [%s](http://127.0.0.1:8080/projects/%s/%s)!
+            
+            *Заголовок:* `%s`
+            
+            *Сроки выполнения:*
+            `%s` - `%s`
+            
+            *Отредактировал:* `%s`
             """;
 }

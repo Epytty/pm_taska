@@ -12,6 +12,8 @@
     <form th:action="@{/projects/{projectId}/new(projectId=${projectId})}" method="post">
         <input name="title" placeholder="Title">
         <input name="description" placeholder="Description">
+        <input type="date" name="startDate">
+        <input type="date" name="endDate">
         <select name="responsibleUser" th:object="${user}">
             <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName}"></option>
         </select>
