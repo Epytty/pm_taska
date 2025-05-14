@@ -32,10 +32,11 @@ public class TaskaBot extends TelegramLongPollingBot {
         }
         String message = update.getMessage().getText();
         Long chatId = update.getMessage().getChatId();
+        String telegramUsername = update.getMessage().getChat().getUserName();
         switch (message) {
             case BotCommands.START -> {
                 String firstName = update.getMessage().getChat().getFirstName();
-                botService.startCommand(chatId, firstName);
+                botService.startCommand(chatId, firstName, telegramUsername);
             }
             case BotCommands.HELP -> botService.helpCommand(chatId);
             default -> botService.unknownCommand(chatId);

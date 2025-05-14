@@ -1,7 +1,9 @@
 package com.taska.pm.service.impl;
 
 import com.taska.pm.bot.patterns.MessagePatterns;
+import com.taska.pm.entity.User;
 import com.taska.pm.exception.message.ExceptionMessages;
+import com.taska.pm.repository.UserRepository;
 import com.taska.pm.service.TaskaBotService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,12 +12,15 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class TaskaBotServiceImpl implements TaskaBotService {
 
     private final TelegramLongPollingBot bot;
+    private final UserRepository userRepository;
 
     @Override
     public void sendMessage(Long chatId, String text) {
@@ -31,7 +36,10 @@ public class TaskaBotServiceImpl implements TaskaBotService {
     }
 
     @Override
-    public void startCommand(Long chatId, String firstName) {
+    public void startCommand(Long chatId, String firstName, String telegramUsername) {
+        User user = userRepository.findByTelegramUsername(telegramUsername);
+        user.setTelegramChatId(chatId);
+        userRepository.save(user);
         sendMessage(chatId, String.format(MessagePatterns.START_COMMAND, firstName));
     }
 

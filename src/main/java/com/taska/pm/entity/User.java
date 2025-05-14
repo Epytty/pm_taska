@@ -31,6 +31,8 @@ public class User {
 
     private String telegramUsername;
 
+    private Long telegramChatId;
+
     @DefaultValue("false")
     private Boolean notificationAgreement;
 

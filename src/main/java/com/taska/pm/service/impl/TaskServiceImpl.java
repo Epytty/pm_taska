@@ -1,5 +1,6 @@
 package com.taska.pm.service.impl;
 
+import com.taska.pm.bot.patterns.MessagePatterns;
 import com.taska.pm.dto.task.TaskSaveDto;
 import com.taska.pm.dto.task.TaskViewDto;
 import com.taska.pm.dto.mapper.TaskMapper;
@@ -14,6 +15,7 @@ import com.taska.pm.repository.ProjectRepository;
 import com.taska.pm.repository.TaskRepository;
 import com.taska.pm.repository.UserRepository;
 import com.taska.pm.service.TaskService;
+import com.taska.pm.service.TaskaBotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,7 @@ public class TaskServiceImpl implements TaskService {
     private final UserRepository userRepository;
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
+    private final TaskaBotService taskaBotService;
 
     @Override
     public TaskViewDto findById(Long id) {
@@ -67,6 +70,12 @@ public class TaskServiceImpl implements TaskService {
         task.setProject(project);
         task.setResponsibleUser(responsibleUser);
         task.setCreator(creator);
+
+        if (responsibleUser.getNotificationAgreement()) {
+            taskaBotService.sendMessage(responsibleUser.getTelegramChatId(),
+                    String.format(MessagePatterns.NEW_TASK_NOTIFICATION,
+                            task.getProject().getName(), task.getTitle(), task.getDescription()));
+        }
         return taskMapper.toDto(taskRepository.save(task));
     }
 
