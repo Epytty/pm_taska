@@ -16,5 +16,5 @@ public interface TaskService {
     TaskViewDto create(Long id, Long creatorId, TaskSaveDto taskSaveDto);
     Optional<TaskViewDto> update(Long id, Long editorId, TaskSaveDto taskSaveDto);
     void delete(Long id);
-    void sendMessageToResponsibleUser(Long projectId, Task task, Long responsibleUserId);
+    void sendMessageToResponsibleUser(Task task, Long responsibleUserId);
 }

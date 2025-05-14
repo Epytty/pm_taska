@@ -74,7 +74,7 @@ public class TaskServiceImpl implements TaskService {
         task.setResponsibleUser(responsibleUser);
         task.setCreator(creator);
         Task createdTask = taskRepository.save(task);
-        sendMessageToResponsibleUser(projectId, createdTask, responsibleUserId);
+        sendMessageToResponsibleUser(createdTask, responsibleUserId);
         return taskMapper.toDto(createdTask);
     }
 
@@ -96,7 +96,7 @@ public class TaskServiceImpl implements TaskService {
             existingTask.setEditor(editor);
             existingTask.setIsEdited(true);
             Task updatedTask = taskRepository.save(existingTask);
-            sendMessageToResponsibleUser(updatedTask.getProject().getId(), updatedTask, updatedTask.getResponsibleUser().getId());
+            sendMessageToResponsibleUser(updatedTask, updatedTask.getResponsibleUser().getId());
             return taskMapper.toDto(updatedTask);
         });
     }
@@ -107,11 +107,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void sendMessageToResponsibleUser(Long projectId, Task task, Long responsibleUserId) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ProjectNotFoundException(
-                        String.format(ExceptionMessages.PROJECT_NOT_FOUND, projectId)
-                ));
+    public void sendMessageToResponsibleUser(Task task, Long responsibleUserId) {
         User responsibleUser = userRepository.findById(responsibleUserId)
             .orElseThrow(() -> new UserNotFoundException(
                 String.format(ExceptionMessages.USER_NOT_FOUND, responsibleUserId)));
