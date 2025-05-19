@@ -10,7 +10,9 @@ public interface ProjectService {
 
     List<ProjectViewDto> findAll();
     ProjectViewDto findById(Long id);
-    ProjectViewDto create(ProjectSaveDto projectSaveDto);
+    ProjectViewDto create(ProjectSaveDto projectSaveDto, Long creatorId);
     Optional<ProjectViewDto> update(Long id, ProjectSaveDto projectSaveDto);
     void delete(Long id);
+    void addUserToProject(Long projectId, Long userId);
+    void excludeUserFromProject(Long projectId, Long userId);
 }

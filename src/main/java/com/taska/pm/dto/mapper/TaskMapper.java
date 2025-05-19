@@ -23,7 +23,6 @@ public interface TaskMapper {
     @Mapping(target = "responsibleUserFullName", qualifiedByName = {"TaskMapperUtil", "getFullNameByUserId"}, source = "responsibleUser")
     @Mapping(target = "creatorFullName", qualifiedByName = {"TaskMapperUtil", "getFullNameByUserId"}, source = "creator")
     @Mapping(target = "editorFullName", qualifiedByName = {"TaskMapperUtil", "getFullNameByUserId"}, source = "editor")
-    @Mapping(target = "id", source = "id")
     TaskViewDto toDto(Task task);
 
     Task toEntity(TaskSaveDto taskSaveDto);

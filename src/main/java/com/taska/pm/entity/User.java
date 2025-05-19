@@ -37,11 +37,18 @@ public class User {
     private Boolean notificationAgreement;
 
     @ManyToOne
+    @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "responsibleUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> assignedTasks = new ArrayList<>();
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> createdProjects = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "participants")
+    private List<Project> assignedProjects = new ArrayList<>();
 
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> createdTasks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "responsibleUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> assignedTasks = new ArrayList<>();
 }

@@ -32,6 +32,7 @@ public class Task {
     private User responsibleUser;
 
     @ManyToOne
+    @JoinColumn(name = "task_creator_id")
     private User creator;
 
     @ManyToOne

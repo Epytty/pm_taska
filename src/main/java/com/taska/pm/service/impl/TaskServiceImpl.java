@@ -1,7 +1,7 @@
 package com.taska.pm.service.impl;
 
 import com.taska.pm.bot.patterns.MessagePatterns;
-import com.taska.pm.dto.project.ProjectViewDto;
+import com.taska.pm.dto.mapper.TaskMapper;
 import com.taska.pm.dto.task.TaskSaveDto;
 import com.taska.pm.dto.task.TaskViewDto;
 import com.taska.pm.dto.mapper.TaskMapper;

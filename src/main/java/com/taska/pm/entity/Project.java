@@ -22,6 +22,18 @@ public class Project {
 
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "project_creator_id")
+    private User creator;
+
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "projects_users",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> participants = new ArrayList<>();
 }

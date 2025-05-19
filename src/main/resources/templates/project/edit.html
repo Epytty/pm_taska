@@ -13,5 +13,13 @@
     <input name="description" th:value="*{description}">
     <button type="submit">Update</button>
 </form>
+
+<!--<form th:action="@{/projects/{projectId/participants/add/{userId}(projectId=${projectId}, userId=${userId})}" th:object="{projectUsers}" method="post">-->
+<!--    <select name="addedUser" th:object="${userProjects}">-->
+<!--        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName}"></option>-->
+<!--    </select>-->
+<!--    <button type="submit">Добавить</button>-->
+<!--</form>-->
+<a th:href="@{/projects/{projectId}(projectId=${projectId})}">Back to Project</a>
 </body>
 </html>
