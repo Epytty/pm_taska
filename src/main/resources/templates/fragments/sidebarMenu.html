@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <title>Document</title>
+</head>
+<body>
+    <div class="sideMenu" id="sideMenu">
+        <div class="menuTrigger">
+            <div class="sideTransitioned">
+                <button class="menuButton" id="menuTrigger">
+                    <div class="menuItem sideTooltip-cnt">
+                        <i class="fi fi-rr-grid sideTooltip-target"></i>
+                        <div class="sideTooltip">Развернуть</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <hr/>
+        <div class="menuItems">
+            <div class="sideTransitioned">
+                <button class="menuButton">
+                <div class="menuItem sideTooltip-cnt">
+                    <i class="fi fi-rr-workflow-setting-alt sideTooltip-target"></i>
+                    <div class="sideTooltip">Мои проекты</div>
+                </div>
+                </button>
+            </div>
+            <div class="sideTransitioned">
+                <button class="menuButton">
+                <div class="menuItem sideTooltip-cnt">
+                    <i class="fi fi-rr-task-checklist sideTooltip-target"></i>
+                    <div class="sideTooltip">Мои задачи</div>
+                </div>
+                </button>
+            </div>
+            <div class="sideTransitioned">
+                <button class="menuButton">
+                <div class="menuItem sideTooltip-cnt">
+                    <i class="fi fi-rr-poll-h sideTooltip-target"></i>
+                    <div class="sideTooltip">Отчёты и документы</div>
+                </div>
+                </button>
+            </div>
+            <div class="sideTransitioned">
+                <button class="menuButton">
+                <div class="menuItem sideTooltip-cnt">
+                    <i class="fi fi-rr-calendar-day sideTooltip-target"></i>
+                    <div class="sideTooltip">Календарь</div>
+                </div>
+                </button>
+            </div>
+            <div class="sideTransitioned">
+                <button class="menuButton">
+                <div class="menuItem sideTooltip-cnt">
+                    <i class="fi fi-rr-people-group sideTooltip-target"></i>
+                    <div class="sideTooltip">Мой отдел</div>
+                </div>
+                </button>
+            </div>
+            <div class="sideTransitioned">
+                <button class="menuButton">
+                <div class="menuItem sideTooltip-cnt">
+                    <i class="fi fi-rr-target-audience sideTooltip-target"></i>
+                    <div class="sideTooltip">Коллеги</div>
+                </div>
+                </button>
+            </div>
+        </div>
+        <hr/>
+        <div class="sideSettings">
+            <div class="sideTransitioned">
+                <button class="menuButton" id="menuTrigger">
+                    <div class="menuItem sideTooltip-cnt">
+                        <i class="fi fi-rr-settings sideTooltip-target"></i>
+                        <div class="sideTooltip">Настройки</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById("menuTrigger").addEventListener("click", function() {
+            let menu = document.getElementById("sideMenu");
+            let icon = this.querySelector(".sideTooltip-target");
+
+            if (menu.classList.contains("expanded")) {
+                menu.classList.remove("expanded");
+                icon.classList.remove("rotate");
+                icon.classList.add("rotateBack");
+                icon.classList.replace("fi-sr-grid", "fi-rr-grid");
+
+                let tooltips = document.querySelectorAll('.sideTooltip');
+                tooltips.forEach(tooltip => {
+                    tooltip.classList.remove('visible');
+                });
+
+                setTimeout(() => {
+                    icon.classList.remove("rotateBack");
+                }, 400);
+            } else {
+                menu.classList.add("expanded");
+                icon.classList.add("rotate");
+                icon.classList.replace("fi-rr-grid", "fi-sr-grid");
+
+                let tooltips = document.querySelectorAll('.sideTooltip');
+                tooltips.forEach(tooltip => {
+                    tooltip.classList.add('visible');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

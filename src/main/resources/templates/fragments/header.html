@@ -4,55 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link th:href="@{/css/style.css}" rel="stylesheet" />
+  <link href="/src/main/resources/static/css/style.css" rel="stylesheet" />
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
   <title>Document</title>
 </head>
 <body>
-  <div th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
-    <header class="header">
-      <div class="leftPart">
-        <div class="burgerMenu">Burger Menu</div> 
-        <span class="headerLabel">
-          <h1>Taska</h1>     
-          <span>project manager</span>
-        </span>
+  <header>
+    <div class="rightPart">
+      <div class="label">
+        <a href="#">
+          <h1>Taska PM</h1>
+        </a>
       </div>
-      <div class="rightPart">
-        <nav class="navBar">
-          <button class="controlButton">
-            <a th:href="@{/projects}">
-              <span class="controlButtonContainer">
-                <img th:src="@{/images/project.svg}" alt="projects" class="controlImage">
-                <span>Проекты</span>
-              </span>
-            </a>
-          </button>
-          <button class="controlButton">
-            <a th:href="@{/profile}">
-              <span class="controlButtonContainer">
-                <img th:src="@{/images/user.svg}" alt="profile" class="controlImage">
-                <span>Профиль</span>
-              </span>
-            </a>
-          </button>
-          <button class="controlButton">
-            <a th:href="@{/logout}">
-              <span class="controlButtonContainer">
-                <img th:src="@{/images/log-out.svg}" alt="logout" class="controlImage">
-                <span>Выйти</span>
-              </span>
-            </a>
-          </button>
-          <button class="controlButton">
-            <a th:href="@{/settings}">
-              <span class="controlButtonContainer">
-                <img th:src="@{/images/settings.svg}" alt="settings" class="controlImage">
-                <span>Настройки</span>
-              </span>
-            </a>
-          </button>
-        </nav>
-      </div>
-    </header>
-  </div>
+    </div>   
+    <div class="leftPart">
+      <nav class="navBar">
+        <div class="transitioned">
+          <a href="#">
+            <div class="navItem tooltip-cnt">
+              <i class="fi fi-rr-user tooltip-target"></i>
+              <div class="tooltip">Профиль</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="transitioned">
+          <a href="#">
+            <div class="navItem tooltip-cnt">
+              <i class="fi fi-rr-settings tooltip-target"></i>
+              <div class="tooltip">Настройки</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="transitioned">
+          <a href="#">
+            <div class="navItem tooltip-cnt">
+              <i class="fi fi-rr-calendar-day tooltip-target"></i>
+              <div class="tooltip">Календарь</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="transitioned">
+          <a href="#">
+            <div class="navItem tooltip-cnt">
+              <i class="fi fi-rr-sign-out-alt tooltip-target"></i>
+              <div class="tooltip">Выход</div>
+            </div>
+          </a>
+        </div>
+      </nav>
+    </div> 
+  </header>
 </body>
 </html>

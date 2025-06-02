@@ -5,35 +5,89 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-brands/css/uicons-brands.css'>
     <title>TaskaPM</title>
 </head>
 <body>
-    <h1>Profile</h1>
+    <main>
+        <img src="/src/main/resources/static/images/background.png" class="profileContentBackground">
+        <div class="profileCard">
+            <div class="profileLabel">
+                <i class="fi fi-rr-id-badge"></i>
+                <div class="groupLabel">
+                    <h1>Отдел</h1>
+                    <span>Java AY</span>
+                </div>
+                <button th:href="@{/profile/edit}" class="editProfileButton">
+                    <i class="fi fi-rr-user-pen"></i>
+                </button>
+            </div>
+            <div class="userInfo" th:object="${user}">
+                <div class="topContainer">
+                    <div class="userNameContainer">
+                        <div class="nameContainerItem">
+                            <label for="firstName">Имя</label>
+                            <div class="userNameText">
+                                <p name="firstName" id="firstName" th:text="*{firstName}">Даниил</p>
+                            </div>
+                        </div>
+                        <div class="nameContainerItem">
+                            <label for="middleName">Отчество</label>
+                            <div class="userNameText">
+                                <p name="middleName" id="middleName" th:text="*{middleName}">Игоревич</p>
+                            </div>
+                        </div>
+                        <div class="nameContainerItem">
+                            <label for="lastName">Фамилия</label>
+                            <div class="userNameText">
+                                <p name="lastName" id="lastName" th:text="*{lastName}">Тарима</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="userPhoto">
 
-    <div th:object="${user}">
-        <label for="firstName">Имя</label>
-        <p name="firstName" id="firstName" th:text="*{firstName}"></p>
-
-        <label for="middleName">Отчество</label>
-        <p name="middleName" id="middleName" th:text="*{middleName}"></p>
-
-        <label for="lastName">Фамилия</label>
-        <p name="lastName" id="lastName" th:text="*{lastName}"></p>
-
-        <label for="telegramUsername">Имя в телеграме</label>
-        <p name="telegramUsername" id="telegramUsername" th:text="*{telegramUsername}"></p>
-
-        <a th:href="@{/profile/edit}">Edit profile</a>
-    </div>
-
-<!--    <form th:action="@{/notifAgree}" method="post">-->
-<!--        <input type="hidden" name="userId" th:value="${user.id}"/>-->
-<!--        <button type="submit">Согласиться</button>-->
-<!--    </form>-->
-
-<!--    <form th:action="@{/notifDisagree}" method="post">-->
-<!--        <input type="hidden" name="userId" th:value="${user.id}"/>-->
-<!--        <button type="submit">Отказаться</button>-->
-<!--    </form>-->
+                    </div>
+                </div>
+                <hr class="profileCardHr">
+                <div class="middleContainer">
+                    
+                </div>
+                <hr class="profileCardHr">
+                <div class="bottomContainer">
+                    <div class="bottomLeft">
+                        <i class="fi fi-brands-telegram"></i>
+                        <i class="fi fi-rr-envelope"></i>
+                    </div>
+                    <div class="bottomRigth">
+                        <div class="telegramInfo">
+                            <div class="telegramInfoContainer">
+                                <i class="fi fi-rr-id-card-clip-alt"></i>
+                                <label for="telegramUsername">Имя в телеграме</label>
+                            </div>
+                            <p name="telegramUsername" id="telegramUsername" th:text="*{telegramUsername}">@ePytty</p>    
+                        </div>
+                        <div class="emailInfo">
+                            <div class="workEmail">
+                                <div class="workEmailContainer">
+                                    <i class="fi fi-rr-corporate-alt"></i>
+                                    <label>Рабочая почта</label>
+                                </div>
+                                <p>daniil.taryma@azati.com</p>
+                            </div>
+                            <div class="personalEmail">
+                                <div class="personalEmailContainer">
+                                    <i class="fi fi-rr-at"></i>
+                                    <label>Личная почта</label>
+                                </div>
+                                <p>tarima949@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </main>
 </body>
 </html>

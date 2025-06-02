@@ -5,15 +5,114 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <title>TaskaPM</title>
+    <link href="/src/main/resources/static/css/style.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <title>Taska PM</title>
 </head>
 <body>
-    <form th:action="@{/login}" method="post" class="loginForm">
-        <span class="loginFormText">Добро пожаловать!</span>
-        <input name="username" placeholder="Логин">
-        <input name="password" type="password" placeholder="Пароль">
-        <button type="submit" class="loginFormSubmit">Войти</button>
-    </form>
+    <div class="loginPage">
+        <div class="backgroundContainer">
+            <div class="roundsContainer" id="container"></div>
+            <h1>Taska PM</h1>
+            <div class="imageContainer">
+                <img class="loginPageImage">
+            </div>
+        </div>
+        <div class="formsContainer">
+            <div class="loginFormContainer">
+                <form th:action="@{/login}" method="post" class="loginForm">
+                    <h1>Логин</h1>
+                    <div class="inputBox">
+                        <input name="username" placeholder="Логин">
+                        <i class="fi fi-rr-user loginPageIcon"></i>
+                    </div>
+                    <div class="inputBox">
+                        <input name="password" type="password" id="password" placeholder="Пароль">
+                        <i id="togglePassword" class="fi fi-rr-lock"></i>
+                    </div>
+                    <button type="submit" class="submitBtn loginSubmit">Войти</button>
+                </form>
+                <div class="forgotLink">
+                    <i class="fi fi-rr-interrogation loginPageIcon"></i>
+                    <a href="#" class="switchLink">Забыли пароль?</a>
+                </div>
+            </div>
+            <div class="supportFormContainer">
+                <form th:action="@{/login}" method="post" class="supportForm">
+                    <h1>Обратитесь в поддержку</h1>
+                    <div class="inputBox supportInput">
+                        <input name="username" placeholder="Логин">
+                        <i class="fi fi-rr-user"></i>
+                    </div>
+                    <div class="inputBox supportInput">
+                        <input name="email" placeholder="Почта">
+                        <i class="fi fi-rr-at loginPageIcon"></i>
+                    </div>
+                    <button type="submit" class="submitBtn supportSubmit">Отправить</button>
+                </form>
+                <div class="backLink">
+                    <i class="fi fi-rr-angle-double-small-left loginPageIcon"></i>
+                    <a href="#" class="switchLink">На форму логина</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("togglePassword").addEventListener("click", function () {
+        let passwordInput = document.getElementById("password");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text"; 
+            this.classList.replace("fi-rr-lock", "fi-rr-unlock");
+        } else {
+            passwordInput.type = "password";
+            this.classList.replace("fi-rr-unlock", "fi-rr-lock");
+        }});
+
+        const container = document.getElementById("container");
+        const colors = ["#00457f", "#2f8ee0"];
+        for (let i = 0; i < 35; i++) {
+            let circle = document.createElement("div");
+            let size = Math.random() * 30 + 60; 
+            circle.style.width = size + "px";
+            circle.style.height = size + "px";
+            circle.classList.add("circle");
+            circle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            circle.style.left = Math.random() * window.innerWidth + "px";
+            circle.style.top = Math.random() * window.innerHeight + "px";
+            container.appendChild(circle);
+        }
+
+        let isForm1Active = true;
+        document.querySelectorAll(".switchLink").forEach(button => {
+            button.addEventListener("click", function () {
+            if (isForm1Active) {
+                document.querySelector(".loginFormContainer").classList.add("hidden");
+                setTimeout(() => {
+                document.querySelector(".loginFormContainer").style.zIndex = "1";
+                document.querySelector(".supportFormContainer").style.zIndex = "2";
+                document.querySelector(".loginFormContainer").classList.remove("hidden");
+                }, 500);
+            } else {
+                document.querySelector(".supportFormContainer").classList.add("hidden");
+                setTimeout(() => {
+                document.querySelector(".supportFormContainer").style.zIndex = "1";
+                document.querySelector(".loginFormContainer").style.zIndex = "2";
+                document.querySelector(".supportFormContainer").classList.remove("hidden");
+                }, 500);
+            }
+            isForm1Active = !isForm1Active;
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const images = [
+                "/src/main/resources/static/images/dog.png",
+                "/src/main/resources/static/images/cup.png"
+            ];
+            const randomIndex = Math.floor(Math.random() * images.length);
+            document.querySelector(".loginPageImage").src = images[randomIndex];
+        });
+    </script>
 </body>
 </html>
