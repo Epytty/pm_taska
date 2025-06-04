@@ -24,7 +24,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/", "/login", "/register").permitAll()
                         .requestMatchers("/admin").hasAnyAuthority("Administrator")
                         .requestMatchers("/projects/**", "/profile").authenticated()
-                        .requestMatchers("/css/style.css", "/js/bootstrap.js", "/css/style.scss").permitAll()
+                        .requestMatchers("/css/style.css", "/js/bootstrap.js", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
