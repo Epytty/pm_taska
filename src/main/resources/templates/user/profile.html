@@ -30,19 +30,19 @@
                         <div class="nameContainerItem">
                             <label for="firstName">Имя</label>
                             <div class="userNameText">
-                                <p name="firstName" id="firstName" th:text="*{firstName}">Даниил</p>
+                                <p name="firstName" id="firstName" th:text="*{firstName}"></p>
                             </div>
                         </div>
                         <div class="nameContainerItem">
                             <label for="middleName">Отчество</label>
                             <div class="userNameText">
-                                <p name="middleName" id="middleName" th:text="*{middleName}">Игоревич</p>
+                                <p name="middleName" id="middleName" th:text="*{middleName}"></p>
                             </div>
                         </div>
                         <div class="nameContainerItem">
                             <label for="lastName">Фамилия</label>
                             <div class="userNameText">
-                                <p name="lastName" id="lastName" th:text="*{lastName}">Тарима</p>
+                                <p name="lastName" id="lastName" th:text="*{lastName}"></p>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                                 <i class="fi fi-rr-id-card-clip-alt"></i>
                                 <label for="telegramUsername">Имя в телеграме</label>
                             </div>
-                            <p name="telegramUsername" id="telegramUsername" th:text="*{telegramUsername}">@ePytty</p>    
+                            <p name="telegramUsername" id="telegramUsername" th:text="*{telegramUsername}"></p>
                         </div>
                         <div class="emailInfo">
                             <div class="workEmail">
@@ -74,14 +74,14 @@
                                     <i class="fi fi-rr-corporate-alt"></i>
                                     <label>Рабочая почта</label>
                                 </div>
-                                <p>daniil.taryma@azati.com</p>
+                                <p name="workEmail" id="workEmail" th:text="*{workEmail}"></p>
                             </div>
                             <div class="personalEmail">
                                 <div class="personalEmailContainer">
                                     <i class="fi fi-rr-at"></i>
                                     <label>Личная почта</label>
                                 </div>
-                                <p>tarima949@gmail.com</p>
+                                <p name="personalEmail" id="personalEmail" th:text="*{personalEmail}"></p>
                             </div>
                         </div>
                     </div>

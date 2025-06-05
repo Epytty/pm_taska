@@ -29,6 +29,10 @@ public class User {
 
     private String lastName;
 
+    private String workEmail;
+
+    private String personalEmail;
+
     private String telegramUsername;
 
     private Long telegramChatId;

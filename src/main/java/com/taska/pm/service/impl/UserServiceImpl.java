@@ -4,6 +4,7 @@ import com.taska.pm.dto.mapper.UserMapper;
 import com.taska.pm.dto.user.UserRegisterDto;
 import com.taska.pm.dto.user.UserUpdateDto;
 import com.taska.pm.dto.user.UserViewDto;
+import com.taska.pm.email.MailMessagePatterns;
 import com.taska.pm.entity.Role;
 import com.taska.pm.entity.User;
 import com.taska.pm.exception.UserNotFoundException;
@@ -14,6 +15,10 @@ import com.taska.pm.service.CustomUserDetailsService;
 import com.taska.pm.service.TaskaBotService;
 import com.taska.pm.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.MailMessage;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +38,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
-    private final TaskaBotService taskaBotService;
+    public final JavaMailSender emailSender;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -75,9 +80,14 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
         Role role = roleRepository.findByName(userRegisterDto.getRole())
                 .orElseThrow(() -> new RoleNotFoundException(
-                        String.format(ExceptionMessages.ROLE_NOT_FOUND, userRegisterDto.getRole())
-                ));
+                        String.format(ExceptionMessages.ROLE_NOT_FOUND, userRegisterDto.getRole())));
         user.setRole(role);
+        sendEmailMessage(
+                userRegisterDto.getPersonalEmail(),
+                String.format(MailMessagePatterns.REGISTER_MESSAGE_SUBJECT),
+                String.format(MailMessagePatterns.REGISTER_MESSAGE_TEXT,
+                        userRegisterDto.getUsername(),
+                        userRegisterDto.getPassword()));
         return userMapper.toDto(userRepository.save(user));
     }
 
@@ -106,4 +116,12 @@ public class UserServiceImpl implements UserService {
                 .orElse(false);
     }
 
+    @Override
+    public void sendEmailMessage(String toAddress, String subject, String message) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(toAddress);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(message);
+        emailSender.send(simpleMailMessage);
+    }
 }

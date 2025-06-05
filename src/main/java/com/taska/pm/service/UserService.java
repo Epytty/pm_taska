@@ -21,5 +21,5 @@ public interface UserService extends UserDetailsService {
     Optional<UserViewDto> update(Long id, UserUpdateDto userUpdateDto);
     void delete(Long id);
     boolean isNotificationExists(Long userId);
-
+    void sendEmailMessage(String toAddress, String subject, String message);
 }

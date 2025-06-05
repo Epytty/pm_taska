@@ -13,6 +13,8 @@
     <form th:action="@{/admin/newUser}" method="post">
         <input name="username">
         <input name="password">
+        <input name="workEmail">
+        <input name="personalEmail">
         <select name="role">
             <option th:each="role : ${roles}" th:object="${role}" th:value="*{name}" th:text="*{name}"></option>
         </select>

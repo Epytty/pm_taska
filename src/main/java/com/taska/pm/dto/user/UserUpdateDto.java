@@ -11,4 +11,6 @@ public class UserUpdateDto {
     private String lastName;
     private String telegramUsername;
     private Boolean notificationAgreement;
+    private String workEmail;
+    private String personalEmail;
 }
