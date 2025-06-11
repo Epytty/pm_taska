@@ -9,11 +9,12 @@
 </head>
 <body>
 
-<form th:action="@{/projects/{projectId}/addUser/{userId}(projectId=${projectId}, userId=${userId})}" method="post">
-    <select th:object="${user}">
-        <option th:each="user : ${users}" th:value="${userId}" th:text="${user.firstName}"></option>
+<form th:action="@{/projects/{projectId}/addUser(projectId=${projectId})}" method="post">
+    <label for="userId">Select User:</label>
+    <select id="userId" name="userId">
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName} + ' ' + ${user.lastName}"></option>
     </select>
-    <button type="submit">Add</button>
+    <button type="submit">Add User</button>
 </form>
 
 <a th:href="@{/projects/{projectId}(projectId=${projectId})}">Back</a>

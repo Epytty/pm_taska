@@ -1,8 +1,8 @@
 package com.taska.pm.service.impl;
 
+import com.taska.pm.dto.mapper.ProjectMapper;
 import com.taska.pm.dto.project.ProjectSaveDto;
 import com.taska.pm.dto.project.ProjectViewDto;
-import com.taska.pm.dto.mapper.ProjectMapper;
 import com.taska.pm.entity.Project;
 import com.taska.pm.entity.ProjectUsers;
 import com.taska.pm.entity.User;
@@ -15,11 +15,13 @@ import com.taska.pm.repository.ProjectsUsersRepository;
 import com.taska.pm.repository.UserRepository;
 import com.taska.pm.service.ProjectService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
@@ -86,8 +88,10 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(() -> new UserNotFoundException(
                         String.format(ExceptionMessages.USER_NOT_FOUND, userId)
                 ));
-        ProjectUsers projectUsers = projectsUsersRepository.findByProjectId(projectId);
-        project.getParticipants().add(user);
+        ProjectUsers projectUsers = new ProjectUsers();
+        projectUsers.setProject(project);
+        projectUsers.setUser(user);
+        projectUsers.setProjectRole(ProjectRole.PARTICIPANT);
         projectsUsersRepository.save(projectUsers);
     }
 
@@ -101,8 +105,11 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(() -> new UserNotFoundException(
                         String.format(ExceptionMessages.USER_NOT_FOUND, userId)
                 ));
-        ProjectUsers projectUsers = projectsUsersRepository.findByProjectId(projectId);
-        project.getParticipants().remove(user);
-        projectsUsersRepository.save(projectUsers);
+        /*
+            TODO проверки на принадлежность пользователя к проекту
+            TODO проверка на удаление самого себя из проекта
+         */
+        ProjectUsers projectUsers = projectsUsersRepository.findByUserId(userId);
+        projectsUsersRepository.deleteById(projectUsers.getId());
     }
 }

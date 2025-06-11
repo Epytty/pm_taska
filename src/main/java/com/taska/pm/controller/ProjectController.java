@@ -72,22 +72,18 @@ public class ProjectController {
         return "project/addUser";
     }
 
-    @PostMapping("/{projectId}/addUser/{userId}")
+    @PostMapping("/{projectId}/addUser")
     public String addUserToProject(@PathVariable(value = "projectId") Long projectId,
-                                   @PathVariable(value = "userId") Long userId) {
-        projectUsersService.findById(projectId);
-        UserViewDto addedUser = userService.findById(userId);
-        projectService.addUserToProject(projectId, addedUser.getId());
+                                   @RequestParam(value = "userId") Long userId) {
+        projectService.addUserToProject(projectId, userId);
         return "redirect:/projects/{projectId}";
     }
 
-    @PostMapping("/{projectId}/excludeUser/{userId}")
+    @PostMapping("/{projectId}/excludeUser")
     public String excludeUserFromProject(@PathVariable(value = "projectId") Long projectId,
-                                         @PathVariable(value = "userId") Long userId) {
-        projectUsersService.findById(projectId);
-        UserViewDto excludedUser = userService.findById(userId);
-        projectService.excludeUserFromProject(projectId, excludedUser.getId());
-        return "redirect:/projects/{projectId}/edit";
+                                         @RequestParam(value = "userId") Long userId) {
+        projectService.excludeUserFromProject(projectId, userId);
+        return "redirect:/projects/{projectId}";
     }
 
     @GetMapping("/{id}/delete")
