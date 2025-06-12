@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +9,10 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="sideMenu" id="sideMenu">
+    <div th:fragment="sideMenu" class="sideMenu" id="sideMenu">
         <div class="menuTrigger">
             <div class="sideTransitioned">
-                <button class="menuButton" id="menuTrigger">
+                <button class="menuButton" id="menuTriggerBtn">
                     <div class="menuItem sideTooltip-cnt">
                         <i class="fi fi-rr-grid sideTooltip-target"></i>
                         <div class="sideTooltip">Развернуть</div>
@@ -83,37 +83,6 @@
             </div>
         </div>
     </div>
-    
-    <script>
-        document.getElementById("menuTrigger").addEventListener("click", function() {
-            let menu = document.getElementById("sideMenu");
-            let icon = this.querySelector(".sideTooltip-target");
-
-            if (menu.classList.contains("expanded")) {
-                menu.classList.remove("expanded");
-                icon.classList.remove("rotate");
-                icon.classList.add("rotateBack");
-                icon.classList.replace("fi-sr-grid", "fi-rr-grid");
-
-                let tooltips = document.querySelectorAll('.sideTooltip');
-                tooltips.forEach(tooltip => {
-                    tooltip.classList.remove('visible');
-                });
-
-                setTimeout(() => {
-                    icon.classList.remove("rotateBack");
-                }, 400);
-            } else {
-                menu.classList.add("expanded");
-                icon.classList.add("rotate");
-                icon.classList.replace("fi-rr-grid", "fi-sr-grid");
-
-                let tooltips = document.querySelectorAll('.sideTooltip');
-                tooltips.forEach(tooltip => {
-                    tooltip.classList.add('visible');
-                });
-            }
-        });
-    </script>
+    <script th:src="@{/js/script.js}"></script>
 </body>
 </html>

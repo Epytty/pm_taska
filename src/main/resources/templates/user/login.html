@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/png" sizes="57x57" th:href="@{/images/favicon-57x57.png}">
     <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <link th:href="@{/static/js/script.js}"/>
     <link href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css' rel='stylesheet'>
     <title>Taska PM</title>
 </head>
@@ -123,64 +122,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.getElementById("togglePassword").addEventListener("click", function () {
-        let passwordInput = document.getElementById("password");
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text"; 
-            this.classList.replace("fi-rr-lock", "fi-rr-unlock");
-        } else {
-            passwordInput.type = "password";
-            this.classList.replace("fi-rr-unlock", "fi-rr-lock");
-        }});
-
-        const container = document.getElementById("container");
-        const colors = ["#00457f", "#2f8ee0"];
-        for (let i = 0; i < 35; i++) {
-            let circle = document.createElement("div");
-            let size = Math.random() * 30 + 60; 
-            circle.style.width = size + "px";
-            circle.style.height = size + "px";
-            circle.classList.add("circle");
-            circle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            circle.style.left = Math.random() * window.innerWidth + "px";
-            circle.style.top = Math.random() * window.innerHeight + "px";
-            container.appendChild(circle);
-        }
-
-        let isForm1Active = true;
-        document.querySelectorAll(".switchLink").forEach(button => {
-            button.addEventListener("click", function () {
-            if (isForm1Active) {
-                document.querySelector(".loginFormContainer").classList.add("hidden");
-                setTimeout(() => {
-                document.querySelector(".loginFormContainer").style.zIndex = "1";
-                document.querySelector(".supportFormContainer").style.zIndex = "2";
-                document.querySelector(".loginFormContainer").classList.remove("hidden");
-                }, 500);
-            } else {
-                document.querySelector(".supportFormContainer").classList.add("hidden");
-                setTimeout(() => {
-                document.querySelector(".supportFormContainer").style.zIndex = "1";
-                document.querySelector(".loginFormContainer").style.zIndex = "2";
-                document.querySelector(".supportFormContainer").classList.remove("hidden");
-                }, 500);
-            }
-            isForm1Active = !isForm1Active;
-            });
-        });
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const images = document.querySelectorAll(".loginPageImage");
-            const randomIndex = Math.floor(Math.random() * images.length);
-
-            images.forEach((img, index) => {
-                if (index === randomIndex) {
-                    img.style.display = "none";
-                }
-            });
-        });
-    </script>
+    <script th:src="@{/js/script.js}"></script>
 </body>
 </html>

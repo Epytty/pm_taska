@@ -6,7 +6,8 @@
   <link th:href="@{/css/style.css}" rel="stylesheet" />
   <link href="/src/main/resources/static/css/style.css" rel="stylesheet" />
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-  <title>Document</title>
+  <link rel='stylesheet' th:href='@{https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css}'>
+  <title>Taska PM</title>
 </head>
 <body>
   <header>
@@ -20,7 +21,7 @@
     <div class="leftPart">
       <nav class="navBar">
         <div class="transitioned">
-          <a href="#">
+          <a th:href="@{/profile}">
             <div class="navItem tooltip-cnt">
               <i class="fi fi-rr-user tooltip-target"></i>
               <div class="tooltip">Профиль</div>
@@ -29,7 +30,7 @@
         </div>
 
         <div class="transitioned">
-          <a href="#">
+          <a th:href="@{/settings}">
             <div class="navItem tooltip-cnt">
               <i class="fi fi-rr-settings tooltip-target"></i>
               <div class="tooltip">Настройки</div>
@@ -38,7 +39,7 @@
         </div>
 
         <div class="transitioned">
-          <a href="#">
+          <a th:href="@{/calendar}">
             <div class="navItem tooltip-cnt">
               <i class="fi fi-rr-calendar-day tooltip-target"></i>
               <div class="tooltip">Календарь</div>
@@ -47,7 +48,7 @@
         </div>
 
         <div class="transitioned">
-          <a href="#">
+          <a th:href="@{/logout}">
             <div class="navItem tooltip-cnt">
               <i class="fi fi-rr-sign-out-alt tooltip-target"></i>
               <div class="tooltip">Выход</div>
