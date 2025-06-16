@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Group Page</h1>
+<div th:object="${group}">
+    <p th:text="*{id}"></p>
+    <p th:text="*{name}"></p>
+    <p th:text="*{leadFullName}"></p>
+    <h3>Members</h3>
+    <div>
+        <ul>
+            <li th:each="member : ${members}" th:object="${member}">
+                <span th:text="${member.firstName}"></span>
+                <a th:href="@{/groups/{groupId}/excludeUser(groupId=${groupId})}">Exclude</a>
+            </li>
+        </ul>
+    </div>
+
+    <a th:href="@{/groups/{groupId}/addUser(groupId=${groupId})}">Add User</a>
+
+</div>
+</body>
+</html>

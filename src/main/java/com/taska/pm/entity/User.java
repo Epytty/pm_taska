@@ -44,6 +44,10 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
+
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> createdProjects = new ArrayList<>();
 

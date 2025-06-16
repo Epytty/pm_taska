@@ -3,6 +3,7 @@ package com.taska.pm.controller;
 import com.taska.pm.dto.user.UserRegisterDto;
 import com.taska.pm.dto.user.UserViewDto;
 import com.taska.pm.entity.Role;
+import com.taska.pm.service.GroupService;
 import com.taska.pm.service.RoleService;
 import com.taska.pm.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class AdminController {
 
     private final UserService userService;
     private final RoleService roleService;
+    private final GroupService groupService;
 
     @GetMapping
     public String adminPanelPage(Model model) {

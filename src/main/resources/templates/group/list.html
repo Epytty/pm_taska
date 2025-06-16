@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Company groups</h1>
+
+<a th:href="@{/newGroup}">New Group</a>
+
+<table>
+    <tr th:each="group : ${groups}" th:object="${group}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{leadFullName}"></td>
+        <td><a th:href="@{/groups/{groupId}(groupId=*{id})}">Show</a></td>
+        <td><a th:href="@{/groups/{groupId}/delete(groupId=*{id})}">Delete</a></td>
+    </tr>
+</table>
+</body>
+</html>
