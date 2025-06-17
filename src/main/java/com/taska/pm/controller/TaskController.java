@@ -2,6 +2,7 @@ package com.taska.pm.controller;
 
 import com.taska.pm.dto.project.ProjectViewDto;
 import com.taska.pm.dto.task.TaskSaveDto;
+import com.taska.pm.dto.task.TaskStatusDto;
 import com.taska.pm.dto.task.TaskViewDto;
 import com.taska.pm.dto.user.UserViewDto;
 import com.taska.pm.entity.ProjectUsers;
@@ -80,6 +81,14 @@ public class TaskController {
                              @ModelAttribute TaskSaveDto taskSaveDto) {
         Long editorId = userDetails.getUser().getId();
         taskService.update(taskId, editorId, taskSaveDto);
+        return "redirect:/projects/{projectId}/{taskId}";
+    }
+
+    @PostMapping("/{taskId}/changeStatus")
+    public String changeTaskStatus(@PathVariable(name = "projectId") Long projectId,
+                                   @PathVariable(name = "taskId") Long taskId,
+                                   @ModelAttribute TaskStatusDto taskStatusDto) {
+        taskService.changeTaskStatus(taskId, taskStatusDto);
         return "redirect:/projects/{projectId}/{taskId}";
     }
 

@@ -2,6 +2,7 @@ package com.taska.pm.dto.mapper;
 
 import com.taska.pm.dto.mapper.util.TaskMapperUtil;
 import com.taska.pm.dto.task.TaskSaveDto;
+import com.taska.pm.dto.task.TaskStatusDto;
 import com.taska.pm.dto.task.TaskViewDto;
 import com.taska.pm.entity.Task;
 import com.taska.pm.entity.User;
@@ -24,6 +25,9 @@ public interface TaskMapper {
     @Mapping(target = "creatorFullName", qualifiedByName = {"TaskMapperUtil", "getFullNameByUserId"}, source = "creator")
     @Mapping(target = "editorFullName", qualifiedByName = {"TaskMapperUtil", "getFullNameByUserId"}, source = "editor")
     TaskViewDto toDto(Task task);
+
+    Task toEntityFromStatusDto(TaskStatusDto taskStatusDto);
+    Task toEntityFromViewDto(TaskViewDto taskViewDto);
 
     Task toEntity(TaskSaveDto taskSaveDto);
 

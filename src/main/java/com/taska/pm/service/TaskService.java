@@ -2,6 +2,7 @@ package com.taska.pm.service;
 
 
 import com.taska.pm.dto.task.TaskSaveDto;
+import com.taska.pm.dto.task.TaskStatusDto;
 import com.taska.pm.dto.task.TaskViewDto;
 import com.taska.pm.entity.Task;
 
@@ -15,6 +16,7 @@ public interface TaskService {
     List<TaskViewDto> findByProjectId(Long projectId);
     TaskViewDto create(Long id, Long creatorId, TaskSaveDto taskSaveDto);
     Optional<TaskViewDto> update(Long id, Long editorId, TaskSaveDto taskSaveDto);
+    void changeTaskStatus(Long taskId, TaskStatusDto taskStatusDto);
     void delete(Long id);
     void sendMessageToResponsibleUser(Task task, Long responsibleUserId);
 }

@@ -13,6 +13,10 @@
         <input name="description" th:value="*{description}">
         <input type="date" name="startDate" th:value="*{startDate}">
         <input type="date" name="endDate" th:value="*{endDate}">
+        <select name="status">
+            <option th:each="status : ${T(com.taska.pm.enums.TaskStatus).values()}"
+                    th:value="${status}" th:text="${status.displayValue}"></option>
+        </select>
         <select name="responsibleUser" th:object="${user}">
             <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName}"></option>
         </select>

@@ -3,12 +3,12 @@ package com.taska.pm.service.impl;
 import com.taska.pm.bot.patterns.MessagePatterns;
 import com.taska.pm.dto.mapper.TaskMapper;
 import com.taska.pm.dto.task.TaskSaveDto;
+import com.taska.pm.dto.task.TaskStatusDto;
 import com.taska.pm.dto.task.TaskViewDto;
-import com.taska.pm.dto.mapper.TaskMapper;
-import com.taska.pm.dto.user.UserViewDto;
 import com.taska.pm.entity.Project;
 import com.taska.pm.entity.Task;
 import com.taska.pm.entity.User;
+import com.taska.pm.enums.TaskStatus;
 import com.taska.pm.exception.ProjectNotFoundException;
 import com.taska.pm.exception.TaskNotFoundException;
 import com.taska.pm.exception.UserNotFoundException;
@@ -18,7 +18,6 @@ import com.taska.pm.repository.TaskRepository;
 import com.taska.pm.repository.UserRepository;
 import com.taska.pm.service.TaskService;
 import com.taska.pm.service.TaskaBotService;
-import com.taska.pm.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +72,7 @@ public class TaskServiceImpl implements TaskService {
         task.setProject(project);
         task.setResponsibleUser(responsibleUser);
         task.setCreator(creator);
+        task.setStatus(TaskStatus.PENDING);
         Task createdTask = taskRepository.save(task);
         sendMessageToResponsibleUser(createdTask, responsibleUserId);
         return taskMapper.toDto(createdTask);
@@ -85,6 +85,7 @@ public class TaskServiceImpl implements TaskService {
             existingTask.setDescription(taskSaveDto.getDescription());
             existingTask.setStartDate(taskSaveDto.getStartDate());
             existingTask.setEndDate(taskSaveDto.getEndDate());
+            existingTask.setStatus(taskSaveDto.getStatus());
             Long userId = taskSaveDto.getResponsibleUser();
             User responsibleUser = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(
@@ -104,6 +105,13 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void delete(Long id) {
         taskRepository.deleteById(id);
+    }
+
+    @Override
+    public void changeTaskStatus(Long taskId, TaskStatusDto taskStatusDto) {
+        Task task = taskRepository.findById(taskId).orElseThrow(null);
+        task.setStatus(taskStatusDto.getStatus());
+        taskRepository.save(task);
     }
 
     @Override

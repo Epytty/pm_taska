@@ -14,6 +14,14 @@
         <p th:text="*{description}"></p>
         <p th:text="*{startDate}"></p>
         <p th:text="*{endDate}"></p>
+        <p th:text="*{status.displayValue}"></p>
+        <form th:action="@{/projects/{projectId}/{taskId}/changeStatus(projectId=${projectId}, taskId=*{id})}" method="post">
+            <select name="status">
+                <option th:each="status : ${T(com.taska.pm.enums.TaskStatus).values()}"
+                        th:value="${status}" th:text="${status.displayValue}"></option>
+            </select>
+            <button type="submit">Изменить статус</button>
+        </form>
         <p th:text="*{responsibleUserFullName}"></p>
         <p th:text="*{creatorFullName}"></p>
         <p th:text="*{editorFullName}"></p>

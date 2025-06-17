@@ -1,5 +1,6 @@
 package com.taska.pm.entity;
 
+import com.taska.pm.enums.TaskStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,9 @@ public class Task {
     private LocalDate startDate;
 
     private LocalDate endDate;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
 
     @ManyToOne
     private Project project;
