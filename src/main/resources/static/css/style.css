@@ -55,7 +55,12 @@ input:-webkit-autofill:active {
 
 .backgroundContainer h1 {
     margin-left: 55%;
-    font-size: 28px;
+    font-size: 36px;
+    text-shadow:
+        -1px -1px 0 white,
+         1px -1px 0 white,
+        -1px  1px 0 white,
+         1px  1px 0 white;
     color: #00457f;
 }
 
@@ -116,7 +121,7 @@ input:-webkit-autofill:active {
 }
 
 .loginLogo {
-    width: 300px;
+    width: 20vw;
 }
 
 .supportFormContainer {
@@ -787,12 +792,11 @@ img {
     }
 
     .imageContainer {
-        display: flex;
-        position: absolute;
         margin-top: 5%;
     }
 
     .loginPageImage {
+        padding-top: 8vh;
         width: 100vw;
     }
 
@@ -849,5 +853,26 @@ img {
     .inputBox input {
         color: white;
         font-size: 4vw;
+    }
+
+    .forgotLink,
+    .backLink {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 3vw;
+    }
+
+    .inputBox i {
+        font-size: 5vw;
+    }
+
+    .forgotLink i, .backLink i {
+        font-size: 5vw;
+    }
+
+        .loginLogo {
+        width: 65vw;
     }
 }
