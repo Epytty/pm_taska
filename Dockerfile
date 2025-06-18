@@ -8,5 +8,5 @@ RUN mvn clean
 RUN mvn package
 
 FROM openjdk:17
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/pm-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
