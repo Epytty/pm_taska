@@ -745,3 +745,86 @@ img {
     top: 15%;
     left: 10%;
 }
+
+@media (max-width: 768px) {
+
+    .hidden {
+        transform: translateY(120%);
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .loginPage {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 95vw;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .backgroundContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .roundsContainer {
+        top: 0;
+        position: fixed;
+        z-index: -1;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .loginLogotypeText {
+        display: flex;
+        flex-direction: column;
+        height: 10%;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .imageContainer {
+        display: flex;
+        position: absolute;
+        margin-top: 5%;
+    }
+
+    .loginPageImage {
+        width: 100vw;
+    }
+
+    .loginFormContainer {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 5%;
+        height: 55vh;
+        width: 85vw;
+        justify-content: space-evenly;
+        background-color: #2f8ee0;
+        border-top-right-radius: 20%;
+        border-top-left-radius: 20%;
+        border-bottom-right-radius: 0%;
+        z-index: 1;
+    }
+
+    .supportFormContainer {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 5%;
+        height: 55vh;
+        width: 85vw;
+        justify-content: space-evenly;
+        background-color: #00457f;
+        border-top-right-radius: 20%;
+        border-top-left-radius: 20%;
+        border-bottom-right-radius: 0%;
+        z-index: 1;
+    }
+}
