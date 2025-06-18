@@ -3,7 +3,7 @@ FROM maven:3.9.8 as build
 WORKDIR /app
 COPY pom.xml /app
 RUN mvn dependency:resolve
-COPY . /app
+COPY ./ /app
 RUN mvn clean
 RUN mvn package
 
