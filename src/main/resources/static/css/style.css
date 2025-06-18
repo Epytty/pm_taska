@@ -827,4 +827,27 @@ img {
         border-bottom-right-radius: 0%;
         z-index: 1;
     }
+
+    .backgroundContainer h1 {
+        margin-left: 55%;
+        font-size: 5vw;
+        color: #00457f;
+    }
+
+    .loginFormContainer h1,
+    .supportFormContainer h1 {
+        font-size: 5vw;
+        color: white;
+    }
+
+    .loginSubmit, .supportSubmit {
+        width: 15vh;
+        height: 50px;
+        font-size: 3vw;
+    }
+
+    .inputBox input {
+        color: white;
+        font-size: 4vw;
+    }
 }

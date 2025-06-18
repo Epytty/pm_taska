@@ -6,7 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/png" sizes="57x57" th:href="@{/images/favicon-57x57.png}">
-    <link rel="stylesheet" href="/src/main/resources/static/css/style.css">
     <link th:href="@{/css/style.css}" rel="stylesheet" />
     <link href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css' rel='stylesheet'>
     <title>Taska PM</title>
@@ -81,11 +80,8 @@
                 <h1>Taska PM</h1>
             </div>
             <div class="imageContainer">
-                <!-- <img th:src="@{'images/dog.png'}" class="loginPageImage"/>
-                <img th:src="@{'images/cup.png'}" class="loginPageImage"/> -->
-                <img src="/src/main/resources/static/images/dog.png" class="loginPageImage"/>
-                <img src="/src/main/resources/static/images/cup.png" class="loginPageImage"/>
-            </div>
+                <img th:src="@{'images/dog.png'}" class="loginPageImage"/>
+                <img th:src="@{'images/cup.png'}" class="loginPageImage"/>
         </div>
         <div class="formsContainer">
             <div class="loginFormContainer">
@@ -127,6 +123,5 @@
         </div>
     </div>
     <script th:src="@{/js/script.js}"></script>
-    <script src="/src/main/resources/static/js/script.js"></script>
 </body>
 </html>
