@@ -13,6 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    function changeHeaderStyle() {
+        const header = document.getElementById("header");
+        header.classList.toggle("header-alt");
+    }
+
+    const headerBtn = document.getElementById("changeHeaderBtn");
+    if (headerBtn) {
+        headerBtn.addEventListener("click", changeHeaderStyle);
+    }
+
     const container = document.getElementById("container");
     if (container) {
         const colors = ["#00457f", "#2f8ee0"];

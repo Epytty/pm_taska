@@ -411,6 +411,7 @@ header {
     position: absolute;
     z-index: 9998;
     top: 0;
+    border-right: 2px solid #2f8ee0;
 }
 
 .sideTransitioned {
@@ -751,6 +752,18 @@ img {
     left: 10%;
 }
 
+main {
+        min-height: 80vh;
+}
+
+footer {
+    display: none;
+}
+
+.changeHeaderBtn {
+    display: none;
+}
+
 @media (max-width: 768px) {
 
     .hidden {
@@ -874,5 +887,105 @@ img {
 
         .loginLogo {
         width: 65vw;
+    }
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: height 0.5s ease;
+    }
+
+    .rightPart {
+        width: 80vw;
+    }
+
+    .leftPart {
+        display: none;
+    }
+
+    .sideMenu {
+        display: none;
+    }
+
+    footer {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        background-color: #edf5fa;
+        width: 100vw;
+        height: 8vh;
+        border-top: 2px solid #2f8ee0;
+    }
+
+    .footerItems {
+        display: flex;
+        width: 100vw;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .footerItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 20%;
+        text-align: center;
+    }
+
+    .footerItem a {
+        text-decoration: none;
+    }
+
+    .footerItem i {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 5vw;
+        color: #2f8ee0;
+    }
+
+    .footerItem:hover {
+        transform: scale(110%);
+        color: #2f8ee0;
+        transition: background-color 0.3s, transform 0.3s;
+        background-color: white;
+    }
+
+    .header-alt {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 15vh;
+    }
+
+    .changeHeaderBtn {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        color: white;
+        border-radius: 20%;
+        background-color: inherit;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .changeHeaderBtn:hover {
+        background-color: white;
+        color: #2f8ee0;
+    }
+
+    .changeHeaderBtn i {
+        font-size: 5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
